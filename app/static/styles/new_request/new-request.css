@@ -1,0 +1,175 @@
+/*CSS page shared by new_request.html, new_request_agency.html, new_request_user.html*/
+
+#request-description {
+    height: 15rem
+}
+
+.sideblock {
+    padding-top: 33rem;
+}
+
+.example-title {
+    padding: 1rem 1.5rem;
+    background-color: #efefef;
+}
+
+.example-request {
+    padding: 1rem 1.5rem;
+    background-color: #efefef;
+}
+
+.top-padding {
+    padding-top: 16rem;
+}
+
+.top-padding2 {
+    padding-top: 5rem;
+}
+
+.parsley-errors-list {
+    color: #e74c3c;
+}
+
+#state {
+    height: 50px;
+}
+
+#zipcode {
+    width: 45px;
+}
+
+#upload-control {
+    padding-bottom: 3rem;
+}
+
+#filename {
+    padding-top: 1rem;
+}
+
+.new-request-description-tooltip {
+    padding-left: 300px;
+    padding-right: 25px;
+}
+
+.new-request-description-tooltip {
+    width: 300px;
+}
+
+.popover {
+    max-width: 100%;
+}
+
+#request-form {
+    width: 100%;
+}
+
+.no-padding-left {
+    padding-left: 0;
+}
+
+.captcha {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.g-recaptcha {
+    display: inline-block;
+}
+
+.recaptcha-error {
+    text-align: center;
+    color: red;
+}
+
+#processing-submission img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    max-width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    pointer-events: all;
+}
+
+.clear-file-button {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    margin-bottom: 10px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    display: none;
+}
+
+.agency-instructions-title {
+    text-align: center;
+}
+
+/* Styles for keyboard accessible upload section */
+span[role=button] {
+    display: table-cell;
+    font-weight: normal;
+    font-size: 14px;
+    padding: 8px 8px;
+    border-radius: 5px;
+    border: 2px solid #265986;
+    color: #ffffff;
+    cursor: pointer;
+    background-color: #265986;
+    outline: none;
+}
+
+span[role=button]:hover,
+span[role=button]:focus {
+    box-shadow: 0 0 5px #595959;
+    background-color: #183a57;
+    border-color: #4D90FE;
+    outline: 2px solid transparent;
+}
+
+.hide {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+input[type=text] .file-text-input {
+    display: table-cell;
+    margin-left: -5px;
+    width: 20rem;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 8px 8px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 2px solid #265986;
+    color: #000000;
+    background-color: #ffffff;
+}
+
+.file-text-input:focus {
+    box-shadow: 0 0 5px #595959;
+    border-color: #4D90FE;
+    outline: 2px solid transparent;
+}
+
+.help-text {
+    margin-bottom: 0;
+}
+
+.parsley-maxFileSize {
+    font-size: 14px;
+    color: #df0000;
+    padding-bottom: 10px;
+}

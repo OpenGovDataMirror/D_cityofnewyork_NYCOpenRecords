@@ -1,0 +1,147 @@
+<script type="text/javascript">
+    "use strict";
+
+    $(document).ready(function () {
+        tinymce.init({
+            menubar: false,
+            // sets tinymce to enable only on specific textareas classes
+            mode: 'specific_textareas',
+            // selector for tinymce textarea classes is set to 'tinymce-area'
+            editor_selector: 'tinymce-note-content',
+            elementpath: false,
+            convert_urls: false,
+            height: 300,
+            plugins: ['noneditable', 'preventdelete', 'lists'],
+            toolbar: ['undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent add_check'],
+            forced_root_block: '',
+            setup: function (editor) {
+                editor.ui.registry.addButton('add_check', {
+                    text: 'Add  ✔',
+                    onAction: function () {
+                        editor.insertContent('&nbsp;&#10004;&nbsp;');
+                    }
+                });
+
+                editor.on('keyup', function () {
+                    let currentLength = tinyMCE.get('note-content').getContent({format: 'text'}).trim().length;
+                    characterCounter('#note-content-character-count', 5000, currentLength);
+                    if (currentLength > 5000) {
+                        $('#note-next-1').prop('disabled', true);
+                        $('#note-content-maxlength-error').show();
+                    }
+                    else {
+                        $('#note-next-1').prop('disabled', false);
+                        $('#note-content-maxlength-error').hide();
+                    }
+                });
+            }
+        });
+
+        var editor = $('#note-editor');
+        var confirmation = $('#email-note-summary');
+
+        // Hides all other divs except for the first
+        $(".note-control .note-divs").each(function (e) {
+            if (e != 0)
+                $(this).hide();
+        });
+
+        // Handles click events on the first next button
+        $("#note-next-1").click(function () {
+            tinyMCE.triggerSave();
+
+            // Onclick, changes button text from to Next
+            $(this).text("Next");
+
+            // Validate note form
+            $("#add-note-form").parsley().validate();
+
+            // If validation fields are valid, proceed with next click function
+            if ($('#add-note-form').parsley().isValid()) {
+                $.ajax({
+                    url: "/response/email",
+                    type: 'POST',
+                    data: {
+                        request_id: "{{ request.id }}",
+                        type: "notes",
+                        note: JSON.stringify({
+                            content: tinyMCE.get('note-content').getContent(),
+                            privacy: $(".note-privacy:checked").val()
+                        }),
+                        tz_name: jstz.determine().name()
+                    },
+                    success: function (data) {
+                        var emailContent = $(".email-note-content-hidden");
+                        emailContent.html(data.template);
+                        flask_moment_render_all();
+                        tinyMCE.get('email-note-content').setContent(emailContent.html());
+                        $(".note-confirmation-header").text(data.header);
+                        editor.unblock();
+                        $('#note-next-2').prop('disabled', false);
+                    }
+                });
+                document.getElementById("note-first").style.display = "none";
+                document.getElementById("note-second").style.display = "block";
+            }
+            // Block tinymce until content is fully loaded by ajax
+            editor.block({
+                message: '<div class=\"col-sm-12 loading-container\"><div class=\"loading-spinner\">' +
+                '<span class=\"sr-only\">Loading content...</span></div></div>'
+            });
+            $('#note-next-2').prop('disabled', true);
+        });
+
+        // Handles click events on the second next button
+        $("#note-next-2").click(function () {
+            tinyMCE.triggerSave();
+            $.ajax({
+                url: "/response/email",
+                type: 'POST',
+                data: {
+                    request_id: "{{ request.id }}",
+                    type: "notes",
+                    email_content: $('#email-note-content').val()
+                },
+                success: function (data) {
+                    $("#email-note-summary").html(data.template);
+                    $("#email-note-summary-hidden").val(data.template);
+                    confirmation.unblock();
+                    $('#note-submit').prop('disabled', false);
+                }
+            });
+            document.getElementById("note-second").style.display = "none";
+            document.getElementById("note-third").style.display = "block";
+            // Block confirmation until content is fully loaded by ajax
+            confirmation.block({
+                message: '<div class=\"col-sm-12 loading-container\"><div class=\"loading-spinner\">' +
+                '<span class=\"sr-only\">Loading content...</span></div></div>'
+            });
+            $('#note-submit').prop('disabled', true);
+        });
+
+        // Handles click events on the first previous button
+        $("#note-prev-1").click(function () {
+            document.getElementById("note-first").style.display = "block";
+            document.getElementById("note-second").style.display = "none";
+        });
+
+        // Handles click events on the second previous button
+        $("#note-prev-2").click(function () {
+            document.getElementById("note-third").style.display = "none";
+            document.getElementById("note-second").style.display = "block";
+        });
+
+        // Disable button on submit
+        $("#add-note-form").submit(function () {
+            $("#note-submit").attr("disabled", true);
+        });
+
+        // Apply parsley data required validation to note title and url
+        $("#note-content").attr("data-parsley-required", "");
+
+        // Apply custom validation messages
+        $("#note-content").attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, note content is required.</strong> Please type in a message.");
+    });
+</script>

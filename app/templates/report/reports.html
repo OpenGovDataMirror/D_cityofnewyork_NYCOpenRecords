@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Reports{% endblock %}
+
+{% block custom_css %}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/plugins/jquery-ui.css') }}"/>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/plugins/parsley.css') }}"/>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/reports.css') }}"/>
+{% endblock %}
+
+{% set active_page="report" %}
+{% block content %}
+    <div role="main">
+        <h1 class="text-center">FOIL Request Stats</h1>
+        <div class="text-center" id="chart-description" tabindex="0">This chart represents the aggregate data of all
+            requests opened on OpenRecords, along with the status of all requests.
+        </div>
+        <br>
+        <canvas id="reportChart" width="500" height="500" role="img"></canvas>
+        <div class="container" style="padding-top:20px">
+            <div class="form-group">
+                {{ report_filter_form.agency.label(for="agency-filter") }}
+                <p>This allows the graph to be filtered by the number of requests assigned to a specific agency.</p>
+                {{ report_filter_form.agency(id="agency-filter", class="input-block-level") }}
+            </div>
+
+            {% if current_user.is_agency %}
+                <div id="user-filter" class="form-group">
+                    {{ report_filter_form.user.label(for="agency-user-filter") }}
+                    <p>This allows the graph to be filtered by the requests assigned to specific users.</p>
+                    {{ report_filter_form.user(id="agency-user-filter", class="input-block-level") }}
+                </div>
+            {% endif %}
+            <button id="submit-button" class="btn btn-success">Submit</button>
+            <button id="clear-filter-button" class="btn btn-primary">Clear Filter</button>
+        </div>
+        {% if not current_user.is_anonymous and current_user.is_agency_admin() %}
+            <br>
+            <hr>
+            <div class="container">
+            <h2 class="text-center">Agency Reports</h2>
+            <h3>FOIL Request Acknowledgement Status</h3>
+            <form id="acknowledgment-report-form" action="/report/acknowledgment" method="POST" data-parsley-validate>
+                {{ acknowledgment_form.csrf_token }}
+                <div class="form-group">
+                    {{ acknowledgment_form.date_from.label }}
+                    {{ acknowledgment_form.date_from(type="text") }}
+                </div>
+                <div class="form-group">
+                    {{ acknowledgment_form.date_to.label }}
+                    {{ acknowledgment_form.date_to(readonly=readonly, type="text") }}
+                </div>
+                {{ acknowledgment_form.submit_field(class="btn btn-success") }}
+            </form>
+            <br>
+            <hr>
+            <h3>Monthly FOIL Metrics</h3>
+            <p>This report contains metrics and raw data for:</p>
+            <ul>
+                <li>Requests received for the given month</li>
+                <li>Total requests remaining from the given month</li>
+                <li>Requests that were received and closed in the same given month</li>
+                <li>Total requests closed in the given month</li>
+                <li>Total requests closed since the creation of the portal</li>
+                <li>Total requests that remain Open/Pending</li>
+                <li>Number of inquiries received in the given month regarding requests</li>
+            </ul>
+            <form id="monthly-metrics-report-form" action="/report/monthly-metrics-report" method="POST" data-parsley-validate>
+                {{ monthly_report_form.csrf_token }}
+                <div class="form-group">
+                    {{ monthly_report_form.year.label(for="monthly-report-year") }}
+                    {{ monthly_report_form.year(id="monthly-report-year", class="input-block-level") }}
+                </div>
+                <div class="form-group">
+                    {{ monthly_report_form.month.label(for="monthly-report-month") }}
+                    {{ monthly_report_form.month(id="monthly-report-month", class="input-block-level") }}
+                </div>
+                {{ monthly_report_form.submit_field(class="btn btn-success") }}
+            </form>
+            <br>
+            <hr>
+            <h3>Open Data Compliance Report</h3>
+            <form id="open-data-report-form" action="/report/open-data-report" method="POST" target="_blank" rel="noreferrer" data-parsley-validate>
+                {{ open_data_report_form.csrf_token }}
+                <div class="form-group">
+                    {{ open_data_report_form.date_from.label }}
+                    {{ open_data_report_form.date_from(type="text") }}
+                </div>
+                <div class="form-group">
+                    {{ open_data_report_form.date_to.label }}
+                    {{ open_data_report_form.date_to(type="text") }}
+                </div>
+                {{ open_data_report_form.submit_field(class="btn btn-success") }}
+            </form>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block custom_script %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/plugins/Chart.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/plugins/jquery.mask.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/plugins/parsley.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/validation/custom_validators.js') }}"></script>
+    {% include 'report/reports.js.html' %}
+{% endblock %}

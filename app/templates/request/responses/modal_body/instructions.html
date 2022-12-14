@@ -1,0 +1,42 @@
+{% if (edit_response_permission or edit_response_privacy_permission) and is_editable
+and current_request.status != request_status.CLOSED %}
+    <form id="instruction-update-{{ response.id }}" class="instruction-update instruction-form"
+          action="/response/{{ response.id }}" method="POST">
+
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+        {% if edit_response_permission %}
+            <div class="instruction-error-messages alert alert-danger" hidden></div>
+            <div id="instruction-{{ response.id }}-maxlength-error" class="tinymce-maxlength-error" hidden>
+                <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Error, Offline Instructions must be less than 500 characters.</strong>
+            </div>
+            <textarea id="instruction-{{ response.id }}" class="input-block-level form-group instruction-content tinymce-edit-instruction-content"
+                      title="content" name="content">{{ response.content | safe }}</textarea>
+            <p id="character-counter-instruction-{{ response.id }}" class="required instruction-content-character-count character-counter">
+                500 characters remaining
+            </p>
+        {% else %}
+            <div class="request-description-text">
+                {{ response.content | safe }}
+            </div>
+        {% endif %}
+
+        {% if edit_response_privacy_permission %}
+            <div>
+                {% for privacy in privacies %}
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="privacy" value="{{ privacy }}"
+                                   {% if response.privacy == privacy %}checked{% endif %}>
+                            {{ privacy | format_response_privacy }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </form>
+{% else %}
+    <div class="request-description-text">
+        {{ response.content | safe }}
+    </div>
+{% endif %}

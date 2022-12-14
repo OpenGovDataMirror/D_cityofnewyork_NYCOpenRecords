@@ -1,0 +1,21 @@
+{% if default_content %}
+    <p>
+        Attention {{ agency_name }} Users,
+    </p>
+    <p>
+        <span class="mceNonEditable">
+            The following file(s) were added to <a href='{{ page }}'>{{ request_id }}</a> and are private:
+        </span>
+    </p>
+    <div class="file-links">
+        <ul>
+            {% for file in private_links %}
+                <li style="list-style: none">
+                    <span class="mceNonEditable">{{ file['title'] }}: <a href="{{ file['link'] }}">{{ file['filename'] }}</a></span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% else %}
+    {{ content | safe }}
+{% endif %}

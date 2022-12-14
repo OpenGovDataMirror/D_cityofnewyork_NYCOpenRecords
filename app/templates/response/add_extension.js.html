@@ -1,0 +1,373 @@
+<script type="text/javascript">
+    "use strict";
+
+    $(document).ready(function () {
+        var form = $("#add-extension-form");
+        var first = form.find("#extension-first");
+        var second = form.find("#extension-second");
+        var third = form.find("#extension-third");
+        var fourth = form.find("#extension-fourth");
+        var point_of_contact = form.find("#point-of-contact");
+
+        var next1 = first.find("#extension-next-1");
+        var next2 = second.find("#extension-next-2");
+        var next3 = third.find("#extension-next-3");
+        var prev2 = second.find("#extension-prev-2");
+        var prev3 = third.find("#extension-prev-3");
+        var prev4 = fourth.find("#extension-prev-4");
+        var submit = fourth.find(".submit-btn");
+
+        var method = first.find("#extension-method");
+        var email_div = second.find("#extension-email");
+        var letter_div = second.find("#extension-letter");
+        var letter_info = second.find("#letter-template-id");
+
+        var edit_body_header = third.find('#edit-body-header');
+
+        var generate_letters_enabled = form.find("#generate-letters-enabled").val();
+
+        tinymce.init({
+            menubar: false,
+            // sets tinymce to enable only on specific textareas classes
+            mode: 'specific_textareas',
+            // selector for tinymce textarea classes is set to 'tinymce-area'
+            editor_selector: 'tinymce-extension-reason',
+            elementpath: false,
+            convert_urls: false,
+            height: 300,
+            plugins: ['noneditable', 'preventdelete', 'lists'],
+            toolbar: ['undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent add_check'],
+            forced_root_block: '',
+            setup: function (editor) {
+                editor.ui.registry.addButton('add_check', {
+                    text: 'Add  ✔',
+                    onAction: function () {
+                        editor.insertContent('&nbsp;&#10004;&nbsp;');
+                    }
+                });
+
+                editor.on('keyup', function () {
+                    let currentLength = tinyMCE.get('extension-reason').getContent({format: 'text'}).trim().length;
+                    characterCounter('#extension-reason-character-count', 5000, currentLength, 20);
+                    if (currentLength > 5000) {
+                        next1.prop('disabled', true);
+                        $('#extension-reason-maxlength-error').show();
+                    }
+                    else {
+                        next1.prop('disabled', false);
+                        $('#extension-reason-maxlength-error').hide();
+                    }
+                });
+            }
+        });
+
+        // parsley
+        var required = [letter_info, method];
+        for (var i = 0; i < required.length; i++) {
+            required[i].attr("data-parsley-required", "");
+        }
+
+        var editor = $('#extension-editor');
+        var confirmation = $('#extension-summary');
+
+        // Reveal / Hide Letter Generation
+        if (generate_letters_enabled === "True") {
+            first.show();
+            second.hide();
+        } else {
+            first.hide();
+            second.show();
+            letter_div.hide();
+            prev2.hide();
+        }
+
+        // Handles click events on the first next button
+        $(next1).click(function (e) {
+            method.parsley().validate();
+            if (!(method.parsley().isValid())) {
+                e.preventDefault();
+                return false;
+            }
+            if (method.val() === 'emails') {
+                letter_div.hide();
+                email_div.show();
+            } else {
+                letter_div.show();
+                email_div.hide();
+            }
+            first.hide();
+            second.show();
+        });
+
+        // Handles click events on the second next button
+        $(next2).click(function (e) {
+            tinyMCE.triggerSave();
+
+            if (method.val() === 'emails') {
+                if ($("#custom-extension").is(':visible')) {
+                    $("#custom-extension").parsley().validate();
+                    if (!$('#custom-extension').parsley().isValid()) {
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+                // Validate extension select field and reason textarea
+                $("#extension-select").parsley().validate();
+                $("#extension-reason").parsley().validate();
+                if (!$('#extension-select').parsley().isValid()) {
+                    e.preventDefault();
+                    return false;
+                }
+                if (!$('#extension-reason').parsley().isValid()) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // If validation fields are valid, proceed with next click function
+                if ($('#extension-select').parsley().isValid() || $("#custom-extension").parsley().isValid()) {
+                    // Store the values of from input fields into variables
+                    var length = $('#extension-select').val();
+                    var custom_due_date = $('#custom-extension').val();
+                    var reason = tinyMCE.get('extension-reason').getContent();
+
+                    $.ajax({
+                        url: "/response/email",
+                        type: 'POST',
+                        data: {
+                            request_id: "{{ request.id }}",
+                            type: "extension",
+                            extension: JSON.stringify({
+                                length: length,
+                                custom_due_date: custom_due_date,
+                                reason: reason
+                            }),
+                            tz_name: jstz.determine().name()
+                        },
+                        success: function (data) {
+                            var emailContent = $(".extension-body-hidden");
+                            emailContent.html(data.template);
+                            flask_moment_render_all();
+                            tinyMCE.get('extension-body').setContent(emailContent.html());
+                            editor.unblock();
+                            next3.prop('disabled', false);
+                        }
+                    });
+                    edit_body_header.html("Edit Email Body");
+                }
+            }
+            else {
+                if ($("#custom-extension-letter").is(':visible')) {
+                    $("#custom-extension-letter").parsley().validate();
+                    if (!$('#custom-extension-letter').parsley().isValid()) {
+                        e.preventDefault();
+                        return false;
+                    }
+                }
+                $("#extension-select-letter").parsley().validate();
+                if (!$('#extension-select-letter').parsley().isValid()) {
+                    e.preventDefault();
+                    return false;
+                }
+                letter_info.parsley().validate();
+                if (!letter_info.parsley().isValid()) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                var length = $('#extension-select-letter').val();
+                var custom_due_date = $('#custom-extension-letter').val();
+                $.ajax({
+                    url: "/response/letter",
+                    type: "POST",
+                    data: {
+                        request_id: "{{ request.id }}",
+                        type: "extension",
+                        extension: JSON.stringify({
+                            length: length,
+                            custom_due_date: custom_due_date,
+                            letter_template: letter_info.val(),
+                            point_of_contact: point_of_contact.val()
+                        }),
+                        tz_name: jstz.determine().name()
+                    },
+                    success: function (data) {
+                        var letterContent = $(".extension-body-hidden");
+                        letterContent.html(data.template);
+                        flask_moment_render_all();
+                        tinyMCE.get("extension-body").setContent(letterContent.html());
+                        editor.unblock();
+                        next3.prop('disabled', false);
+                    }
+                });
+                edit_body_header.html("Edit Letter Body");
+            }
+            second.hide();
+            third.show();
+            editor.block({
+                message: '<div class=\"col-sm-12 loading-container\"><div class=\"loading-spinner\">' +
+                '<span class=\"sr-only\">Loading content...</span></div></div>'
+            });
+            next3.prop('disabled', true);
+        });
+
+        $(next3).click(function () {
+            tinyMCE.triggerSave();
+            if (method.val() === 'emails') {
+                $.ajax({
+                    url: "/response/email",
+                    type: 'POST',
+                    data: {
+                        request_id: "{{ request.id }}",
+                        type: "extension",
+                        email_content: $('#extension-body').val()
+                    },
+                    success: function (data) {
+                        $("#extension-summary").html(data.template);
+                        $("#extension-summary-hidden").val(data.template);
+                        $("#extension-tz-name").val(jstz.determine().name());
+                        $(".extension-confirmation-header").text(data.header);
+                        confirmation.unblock();
+                        submit.prop('disabled', false);
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: "/response/letter",
+                    type: "POST",
+                    data: {
+                        request_id: "{{ request.id }}",
+                        type: "extension",
+                        letter_content: $('#extension-body').val()
+                    },
+                    success: function (data) {
+                        $("#extension-summary").html(data.template);
+                        $("#extension-summary-hidden").val(data.template);
+                        $("#extension-tz-name").val(jstz.determine().name());
+                        $(".extension-confirmation-header").text(data.header);
+                        confirmation.unblock();
+                        submit.prop('disabled', false);
+                    }
+                })
+            }
+            third.hide();
+            fourth.show();
+            confirmation.block({
+                message: '<div class=\"col-sm-12 loading-container\"><div class=\"loading-spinner\">' +
+                '<span class=\"sr-only\">Loading content...</span></div></div>'
+            });
+            submit.prop('disabled', true);
+        });
+
+        prev2.click(function () {
+            second.hide();
+            first.show();
+        });
+
+        prev3.click(function () {
+            third.hide();
+            second.show();
+        });
+
+        prev4.click(function () {
+            fourth.hide();
+            third.show();
+        });
+
+        // Disable button on submit
+        $("#add-extension-form").submit(function() {
+            $("#extension-submit").attr("disabled", true);
+        });
+
+        // Shows custom due date datepicker when Custom Due Date is selected
+        $("#extension-select").change(function () {
+            var selected = $(this).val();
+            if (selected === "-1") {
+                $("#custom-due-date").show();
+            }
+            else {
+                $("#custom-due-date").hide();
+            }
+        });
+
+        $("#extension-select-letter").change(function () {
+            var selected = $(this).val();
+            if (selected === "-1") {
+                $("#custom-due-date-letter").show();
+            }
+            else {
+                $("#custom-due-date-letter").hide();
+            }
+        });
+
+        holiday_dates = {{ holidays | safe }};  // safe: string -> array
+
+        // TODO: Implement parsley remote validator for is_holiday endpoint
+        {#    $('#custom-extension').attr('date-parsley-remote', '');#}
+        {#    $('#custom-extension').attr('data-parsley-remote-validator', 'is_holiday');#}
+        {##}
+        {#    window.Parsley.addAsyncValidator('is_holiday', function(xhr) {#}
+        {#        console.log(this.$element);#}
+        {#        return 400 == xhr.status;#}
+        {#    }, '/response/is_holiday');#}
+
+        // Datepicker for extension date of a request
+        $("#custom-extension").datepicker({
+            dateFormat: "mm/dd/yy",
+            daysOfWeekDisabled: [0, 6],
+            beforeShowDay: notHolidayOrWeekend,
+            minDate: "{{ request.due_date.strftime('%m/%d/%Y') }}"
+        });
+
+        $("#custom-extension-letter").datepicker({
+            dateFormat: "mm/dd/yy",
+            daysOfWeekDisabled: [0, 6],
+            beforeShowDay: notHolidayOrWeekend,
+            minDate: "{{ request.due_date.strftime('%m/%d/%Y') }}"
+        });
+
+        // Set datepicker text field to prevent keyboard input
+        $("#custom-extension").keydown(false);
+        $("#custom-extension-letter").keydown(false);
+
+        // Loop through required fields and apply a data-parsley-required attribute to them
+        var required_fields = ["custom-extension","custom-extension-letter", "extension-select",
+                               "extension-select-letter", "extension-reason", "extension-method"];
+        for (var i = 0; i < required_fields.length; i++) {
+            $("#" + required_fields[i]).attr("data-parsley-required", "");
+        }
+
+        // Apply parsley minimum length validation to extension reason
+        $("#extension-reason").attr("data-parsley-minlength", "20");
+        $("#extension-reason").attr("data-parsley-maxlength", "5000");
+
+        // Apply custom validation messages
+        method.attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, extension method is required.</strong> Please select an extension method from the drop-down menu.");
+        letter_info.attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, a template is required.</strong> Please select a template from the drop-down menu.");
+        $("#custom-extension").attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, extension date must be chosen.</strong>");
+        $("#extension-select").attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, extension duration is required. Please select an extension duration from the drop-down menu.</strong>");
+        $("#extension-reason").attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, extension reason is required.</strong> Please type in a reason.");
+        $("#custom-extension-letter").attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, extension date must be chosen.</strong>");
+        $("#extension-select-letter").attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, extension length must be selected.</strong>");
+        $("#extension-reason").attr("data-parsley-minlength-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, extension reason must be at least 20 characters.</strong>");
+        $("#extension-reason").attr("data-parsley-maxlength-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, extension reason must be less than 5000 characters.</strong>");
+    });
+</script>

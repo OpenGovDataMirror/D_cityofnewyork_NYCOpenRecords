@@ -1,0 +1,54 @@
+<div>
+    Created By:
+    {% if current_user == response.creator %}
+        You
+    {% elif current_user.is_agency %}
+        {{ response.creator.name }}
+    {% else %}
+        Agency
+    {% endif %}
+</div>
+<br>
+
+{% if (edit_response_permission or edit_privacy_response_permission) and is_editable
+and current_request.status != request_status.CLOSED %}
+    <form id="note-update-{{ response.id }}" class="note-update note-form"
+          action="/response/{{ response.id }}" method="POST">
+
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+        <div class="note-error-messages alert alert-danger" hidden></div>
+        {% if edit_response_permission %}
+            <div id="note-{{ response.id }}-maxlength-error" class="tinymce-maxlength-error" hidden>
+                        <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Error, note content must be less than 5000 characters.</strong>
+            </div>
+            <textarea id="note-{{ response.id }}" class="input-block-level form-group note-content tinymce-edit-note-content"
+                      title="content" name="content" maxlength="5000">{{ response.content | safe }}</textarea>
+            <p id="character-counter-note-{{ response.id }}" class="required note-content-character-count character-counter">
+                5000 characters remaining
+            </p>
+        {% else %}
+            <div class="request-description-text">
+                {{ response.content | safe }}
+            </div>
+        {% endif %}
+
+        {% if edit_response_privacy_permission %}
+            <div>
+                {% for privacy in privacies %}
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="privacy" value="{{ privacy }}"
+                                   {% if response.privacy == privacy %}checked{% endif %}>
+                            {{ privacy | format_response_privacy }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </form>
+{% else %}
+    <div class="request-description-text">
+        {{ response.content | safe }}
+    </div>
+{% endif %}

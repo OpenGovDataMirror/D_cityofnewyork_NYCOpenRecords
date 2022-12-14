@@ -1,0 +1,314 @@
+<script type="text/javascript">
+    "use strict";
+
+    var agencyFilter = $("#agency-filter");
+    var agencyUserFilter = $("#agency-user-filter");
+    var userFilterDiv = $("#user-filter");
+    var chartDescription = $("#chart-description");
+    var submit = $("#submit-button");
+    var clearFilter = $("#clear-filter-button");
+
+    var ctx = document.getElementById("reportChart");
+    var reportChart;
+
+    var ack_date_from = $("#date_from");
+    var ack_date_to = $("#date_to");
+
+    var monthly_report_month = $("#monthly-report-month");
+    var monthly_report_year = $("#monthly-report-year");
+
+    var open_data_date_from = $("#open-data-date-from");
+    var open_data_date_to = $("#open-data-date-to");
+
+    function drawChart(labels, values) {
+        reportChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(149, 180, 149, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        '#328332'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Number of Requests"
+                        },
+                        ticks: {
+                            maxTicksLimit: 10,
+                            beginAtZero: true,
+                            stepSize: Math.min(Math.max.apply(null, values), 10) < 10 ? 1 : false
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Request Status"
+                        }
+                    }]
+                },
+                responsive: false,
+                legend: {
+                    display: false
+                }
+            }
+        });
+    }
+
+    // ajax call on initial page load
+    $.ajax({
+        url: "/report/",
+        type: "GET",
+        data: {
+            agency_ein: agencyFilter.val()
+        },
+        success: function (data) {
+            drawChart(data.labels, data.values);
+            $("#reportChart").attr("aria-label", "Bar graph of all FOIL requests in OpenRecords. " + (data.values[0] +
+                data.values[1]).toLocaleString() + " requests total. " + data.values[0].toLocaleString() +
+                " requests open. " + data.values[1].toLocaleString() + " requests closed.");
+            chartDescription.html("This chart represents the aggregate data of all requests opened on OpenRecords, " +
+                "along with the status of all requests. <strong>" + (data.values[0] + data.values[1]).toLocaleString() +
+                " requests total. " + data.values[0].toLocaleString() + " requests open. " +
+                data.values[1].toLocaleString() + " requests closed.</strong>");
+            chartDescription.focus();
+        }
+    });
+
+    // Update the agency user filter list whenever you change agencies
+    agencyFilter.change(function () {
+        $.ajax({
+            url: "/report/",
+            type: "GET",
+            data: {
+                agency_ein: agencyFilter.val()
+            },
+            success: function (data) {
+                if (data.is_visible && data.active_users.length > 0 && data.results) {
+                    var sel = agencyUserFilter;
+                    sel.empty();
+                    for (var i = 0; i < (data.active_users).length; i++) {
+                        var opt = document.createElement("option");
+                        opt.innerHTML = data.active_users[i][1];
+                        opt.value = data.active_users[i][0];
+                        sel.append(opt);
+                    }
+                    userFilterDiv.show();
+                } else {
+                    userFilterDiv.hide();
+                }
+            }
+        });
+    });
+
+    var superUser = "{{ current_user.is_super }}";
+    var agencyAdmin = "{{ current_user.has_agency_admin }}";
+
+    // handler for submit button
+    submit.click(function () {
+        // Behavior when user is agency agency admin/super user and the user filter is visible
+        if ((agencyAdmin || superUser) && userFilterDiv.is(":visible")) {
+            $.ajax({
+                url: "/report/",
+                type: "GET",
+                data: {
+                    user_guid: agencyUserFilter.val(),
+                    agency_ein: agencyFilter.val()
+                },
+                success: function (data) {
+                    if (data.is_visible) {
+                        for (var i = 0; i < (data.values).length; ++i) {
+                            reportChart.data.datasets[0].data[i] = data.values[i]
+                        }
+                        var maxTicks = Math.min(Math.max.apply(null, data.values), 10);
+                        reportChart.options.scales.yAxes[0].ticks.maxTicksLimit = 10;
+                        reportChart.options.scales.yAxes[0].ticks.stepSize = maxTicks < 10 ? 1 : false;
+                        reportChart.update();
+                        if ($("#agency-user-filter option:selected").text() === "") {
+                            $("#reportChart").attr("aria-label", "Bar graph of all FOIL requests for " +
+                                $("#agency-filter option:selected").text() + ". " +
+                                (data.values[0] + data.values[1]).toLocaleString() + " requests total. " +
+                                data.values[0].toLocaleString() + " requests open. " + data.values[1].toLocaleString() +
+                                " requests closed.");
+                            chartDescription.html("This chart represents the aggregate data of all requests opened for " +
+                                $("#agency-filter option:selected").text() +
+                                ", along with the status of those requests. <strong>" +
+                                (data.values[0] + data.values[1]).toLocaleString() + " requests total. " +
+                                data.values[0].toLocaleString() + " requests open. " +
+                                data.values[1].toLocaleString() + " requests closed.</strong>");
+                        } else {
+                            $("#reportChart").attr("aria-label", "Bar graph of all FOIL requests assigned to " +
+                                $("#agency-user-filter option:selected").text() + ". " +
+                                (data.values[0] + data.values[1]).toLocaleString() + " requests total. " +
+                                data.values[0].toLocaleString() + " requests open. " + data.values[1].toLocaleString() +
+                                " requests closed.");
+                            chartDescription.html("This chart represents the aggregate data of all requests assigned " +
+                                "to " + $("#agency-user-filter option:selected").text() +
+                                ", along with the status of those requests. <strong>" +
+                                (data.values[0] + data.values[1]).toLocaleString() + " requests total. " +
+                                data.values[0].toLocaleString() + " requests open. " +
+                                data.values[1].toLocaleString() + " requests closed.</strong>");
+                        }
+                        chartDescription.focus();
+                    }
+                }
+            });
+        }
+        // Default behavior for all other users
+        else {
+            $.ajax({
+                url: "/report/",
+                type: "GET",
+                data: {
+                    agency_ein: agencyFilter.val()
+                },
+                success: function (data) {
+                    for (var i = 0; i < (data.values).length; ++i) {
+                        reportChart.data.datasets[0].data[i] = data.values[i]
+                    }
+                    var maxTicks = Math.min(Math.max.apply(null, data.values), 10);
+                    reportChart.options.scales.yAxes[0].ticks.maxTicksLimit = 10;
+                    reportChart.options.scales.yAxes[0].ticks.stepSize = maxTicks < 10 ? 1 : false;
+                    reportChart.update();
+
+                    if (data.is_visible && data.active_users.length > 0 && data.results) {
+                        var sel = agencyUserFilter;
+                        sel.empty();
+                        for (var i = 0; i < (data.active_users).length; i++) {
+                            var opt = document.createElement("option");
+                            opt.innerHTML = data.active_users[i][1];
+                            opt.value = data.active_users[i][0];
+                            sel.append(opt);
+                        }
+                        userFilterDiv.show();
+                    } else {
+                        userFilterDiv.hide();
+                    }
+                    if ($("#agency-filter option:selected").text() === "All") {
+                        $("#reportChart").attr("aria-label", "Bar graph of all FOIL requests in OpenRecords. " + (data.values[0] +
+                            data.values[1]).toLocaleString() + " requests total. " + data.values[0].toLocaleString() +
+                            " requests open. " + data.values[1].toLocaleString() + " requests closed.");
+                        chartDescription.html("This chart represents the aggregate data of all requests opened on " +
+                            "OpenRecords, along with the status of all requests. <strong>" +
+                            (data.values[0] + data.values[1]).toLocaleString() + " requests total. " +
+                            data.values[0].toLocaleString() + " requests open. " +
+                            data.values[1].toLocaleString() + " requests closed.</strong>");
+                    } else {
+                        $("#reportChart").attr("aria-label", "Bar graph of all FOIL requests for " +
+                            $("#agency-filter option:selected").text() + ". " +
+                            (data.values[0] + data.values[1]).toLocaleString() + " requests total. " +
+                            data.values[0].toLocaleString() + " requests open. " + data.values[1].toLocaleString() +
+                            " requests closed.");
+                        chartDescription.html("This chart represents the aggregate data of all requests opened for " +
+                            $("#agency-filter option:selected").text() +
+                            ", along with the status of those requests. <strong>" +
+                            (data.values[0] + data.values[1]).toLocaleString() + " requests total. " +
+                            data.values[0].toLocaleString() + " requests open. " +
+                            data.values[1].toLocaleString() + " requests closed.</strong>");
+                    }
+                    chartDescription.focus();
+                }
+            });
+        }
+    });
+
+    clearFilter.click(function () {
+        userFilterDiv.hide();
+        $("#agency-filter").val("all");
+        $.ajax({
+            url: "/report/",
+            type: "GET",
+            data: {
+                agency_ein: agencyFilter.val()
+            },
+            success: function (data) {
+                drawChart(data.labels, data.values);
+                $("#reportChart").attr("aria-label", "Bar graph of all FOIL requests in OpenRecords. " + (data.values[0] +
+                    data.values[1]).toLocaleString() + " requests total. " + data.values[0].toLocaleString() +
+                    " requests open. " + data.values[1].toLocaleString() + " requests closed.");
+                chartDescription.html("This chart represents the aggregate data of all requests opened on OpenRecords, " +
+                    "along with the status of all requests. <strong>" + (data.values[0] + data.values[1]).toLocaleString() +
+                    " requests total. " + data.values[0].toLocaleString() + " requests open. " +
+                    data.values[1].toLocaleString() + " requests closed.</strong>");
+                chartDescription.focus();
+            }
+        });
+    });
+
+    ack_date_from.attr('data-parsley-valid-date', '');
+    ack_date_to.attr('data-parsley-valid-date', '');
+    ack_date_from.attr("data-parsley-required-message",
+        '<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;' +
+        '<strong>Error, date from is required.</strong> Please select a date from the datepicker.');
+    ack_date_to.attr("data-parsley-required-message",
+        '<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;' +
+        '<strong>Error, date to is required.</strong> Please select a date from the datepicker.');
+
+    ack_date_from.datepicker({
+        dateFormat: "mm/dd/yy",
+        maxDate: "-1W"
+    })
+        .mask("99/99/9999")
+        .keydown(function (e) {
+            // prevent keyboard input
+            e.preventDefault();
+        });
+
+    ack_date_from.change(function () {
+        var new_date = new Date(ack_date_from.val());
+        new_date.setDate(new_date.getDate() + 7);
+
+        ack_date_to.datepicker("option", "minDate", new_date);
+        ack_date_to.datepicker("option", "maxDate", new_date);
+        ack_date_to.val(new_date.toLocaleDateString("en-US", {month: "2-digit", day: "2-digit", year: "numeric"}));
+    });
+
+    monthly_report_month.attr('data-parsley-required', '');
+    monthly_report_year.attr('data-parsley-required', '');
+    monthly_report_month.attr('data-parsley-required-message',
+    '<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;' +
+    '<strong>Error, Month is required.</strong> Please select a month from the drop-down menu.');
+    monthly_report_year.attr('data-parsley-required-message',
+    '<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;' +
+    '<strong>Error, Year is required.</strong> Please select a year from the drop-down menu.');
+
+    open_data_date_from.attr('data-parsley-valid-date', '');
+    open_data_date_to.attr('data-parsley-valid-date', '');
+    open_data_date_from.attr("data-parsley-required-message",
+        '<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;' +
+        '<strong>Error, date from is required.</strong> Please select a date from the datepicker.');
+    open_data_date_to.attr("data-parsley-required-message",
+        '<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;' +
+        '<strong>Error, date to is required.</strong> Please select a date from the datepicker.');
+
+    open_data_date_from.datepicker({
+        dateFormat: "mm/dd/yy",
+        maxDate: 0
+    })
+        .mask("99/99/9999")
+        .keydown(function (e) {
+            // prevent keyboard input
+            e.preventDefault();
+        });
+
+    open_data_date_to.datepicker({
+        dateFormat: "mm/dd/yy",
+        maxDate: 0
+    })
+        .mask("99/99/9999")
+        .keydown(function (e) {
+            // prevent keyboard input
+            e.preventDefault();
+        });
+</script>

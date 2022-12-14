@@ -1,0 +1,1904 @@
+{
+  "agencies": [
+    {
+      "ein": "0810",
+      "parent_ein": "810",
+      "categories": [
+        "Housing & Development"
+      ],
+      "name": "Department of Buildings",
+      "next_request_number": 1,
+      "default_email": "foil@buildings.nyc.gov",
+      "appeals_email": "foil@buildings.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DOB"
+    },
+    {
+      "ein": "0806",
+      "parent_ein": "806",
+      "categories": [
+        "Housing & Development"
+      ],
+      "name": "Department of Housing Preservation and Development",
+      "next_request_number": 1,
+      "default_email": "HPDFOIL@hpd.nyc.gov",
+      "appeals_email": "WEINH@hpd.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "HPD"
+    },
+    {
+      "ein": "0002",
+      "parent_ein": "002",
+      "categories": [
+        "Civic Services"
+      ],
+      "name": "Mayor's Office",
+      "next_request_number": 1,
+      "default_email": "foil@cityhall.nyc.gov",
+      "appeals_email": "foilappeal@cityhall.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [
+          "002F"
+        ],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "OOM"
+    },
+    {
+      "ein": "0836",
+      "parent_ein": "836",
+      "categories": [
+        "Business"
+      ],
+      "name": "Department of Finance",
+      "next_request_number": 1,
+      "default_email": "foil@finance.nyc.gov",
+      "appeals_email": "foilappeals@finance.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DOF"
+    },
+    {
+      "ein": "0126",
+      "parent_ein": "126",
+      "categories": [
+        "Culture & Recreation"
+      ],
+      "name": "Department of Cultural Affairs",
+      "next_request_number": 1,
+      "default_email": "foil@culture.nyc.gov",
+      "appeals_email": "appeals@culture.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DCLA"
+    },
+    {
+      "ein": "0866",
+      "parent_ein": "866",
+      "categories": [
+        "Business"
+      ],
+      "name": "Department of Consumer Affairs",
+      "next_request_number": 1,
+      "default_email": "dcafoil@dca.nyc.gov",
+      "appeals_email": "DCAFOILAPPEALS@dca.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DCA"
+    },
+    {
+      "ein": "0059",
+      "parent_ein": "059",
+      "categories": [
+        "Housing & Development"
+      ],
+      "name": "Board of Standards and Appeals",
+      "next_request_number": 1,
+      "default_email": "vrivas@bsa.nyc.gov",
+      "appeals_email": "lmonroe@bsa.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "BSA"
+    },
+    {
+      "ein": "0040",
+      "parent_ein": "040",
+      "categories": [
+        "Education"
+      ],
+      "name": "Department of Education",
+      "next_request_number": 1,
+      "default_email": "foil@schools.nyc.gov",
+      "appeals_email": "foil@schools.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DOE"
+    },
+    {
+      "ein": "0054",
+      "parent_ein": "054",
+      "categories": [
+        "Public Safety"
+      ],
+      "name": "Civilian Complaint Review Board",
+      "next_request_number": 1,
+      "default_email": "foil@ccrb.nyc.gov",
+      "appeals_email": "foil@ccrb.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": "Requests for Body-Worn Camera (BWC) recordings and other police documents should be made directly to the New York City Police Department (NYPD). Requests can be submitted through the OpenRecords portal by selecting NYPD from the dropdown menu.<br/><br/>The Civilian Complaint Review Board (CCRB) only handles civilian complaints involving members of the New York City Police Department. Complaints regarding other matters should be directed to 311 or other relevant city agency."
+        }
+      },
+      "acronym": "CCRB"
+    },
+    {
+      "ein": "0073",
+      "parent_ein": "073",
+      "categories": [
+        "Public Safety"
+      ],
+      "name": "Board of Correction",
+      "next_request_number": 1,
+      "default_email": "foil@boc.nyc.gov",
+      "appeals_email": "foilappeals@boc.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "BOC"
+    },
+    {
+      "ein": "0850",
+      "parent_ein": "850",
+      "categories": [
+        "Housing & Development"
+      ],
+      "name": "Department of Design and Construction",
+      "next_request_number": 1,
+      "default_email": "FOIL_requests@ddc.nyc.gov",
+      "appeals_email": "FOIL_requests@ddc.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DDC"
+    },
+    {
+      "ein": "0156",
+      "parent_ein": "156",
+      "categories": [
+        "Transportation"
+      ],
+      "name": "Taxi and Limousine Commission",
+      "next_request_number": 1,
+      "default_email": "foil@tlc.nyc.gov",
+      "appeals_email": "foil@tlc.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "TLC"
+    },
+    {
+      "ein": "0801",
+      "parent_ein": "801",
+      "categories": [
+        "Business"
+      ],
+      "name": "Department of Small Business Services",
+      "next_request_number": 1,
+      "default_email": "foil@sbs.nyc.gov",
+      "appeals_email": "foil@sbs.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "SBS"
+    },
+    {
+      "ein": "0025",
+      "parent_ein": "025",
+      "categories": [
+        "Civic Services",
+        "Public Safety"
+      ],
+      "name": "Law Department",
+      "next_request_number": 1,
+      "default_email": "foil@law.nyc.gov",
+      "appeals_email": "foil@law.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "LAW"
+    },
+    {
+      "ein": "0846",
+      "parent_ein": "846",
+      "categories": [
+        "Culture & Recreation"
+      ],
+      "name": "Department of Parks and Recreation",
+      "next_request_number": 1,
+      "default_email": "foil@parks.nyc.gov",
+      "appeals_email": "foil@parks.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DPR"
+    },
+    {
+      "ein": "0826",
+      "parent_ein": "826",
+      "categories": [
+        "Environment"
+      ],
+      "name": "Department of Environmental Protection",
+      "next_request_number": 1,
+      "default_email": "foils@dep.nyc.gov",
+      "appeals_email": "foilappeals@dep.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DEP"
+    },
+    {
+      "ein": "0226",
+      "parent_ein": "226",
+      "categories": [
+        "Civic Services",
+        "Social Services"
+      ],
+      "name": "NYC Commission on Human Rights",
+      "next_request_number": 1,
+      "default_email": "foil@cchr.nyc.gov",
+      "appeals_email": "appeals@cchr.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "CCHR"
+    },
+    {
+      "ein": "0067",
+      "parent_ein": "067",
+      "categories": [
+        "Social Services"
+      ],
+      "name": "Administration for Children's Services",
+      "next_request_number": 1,
+      "default_email": "foil@acs.nyc.gov",
+      "appeals_email": "FOILAppeal@acs.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": "<p><strong><u>Requests for Child Protective Investigation Records should be directed to:</u></strong></p><p>ACS Records and Compliance Unit</p><p>Please submit a written, notarized request that includes the names, dates of birth, and last known address/ borough for individuals who may have been involved in the Child Protective Investigation. Please include a mailing address where any records you are entitled to can be sent.  This written and notarized request may be sent by fax to the Records and Compliance Unit at fax (212) 341-0726 or by Mail to The New York City Administration for Children\u2019s Services, Records & Compliance Unit, 150 William Street, 5th Floor, New York, NY 10038.  (Do Not submit a Health Information Privacy and Portability Act  \u201cHIPPA\u201d Form as ACS is not a HIPPA entity.)</p><br><p><strong><u>Requests for Foster Care Records should be directed to:</u></strong></p><p>Please direct Foster Care Record Requests to the specific Foster Care Agency that provided services to your family.  Typically, ACS does not maintain foster care records.  If the Foster Care agency is closed and no longer operating, ACS may have some information about the location of the foster care records.  If the foster care agency is no longer operating, you can send a written, notarized request with your name, date of birth and last known address/borough by fax to the Records & Compliance Unit at (212) 341-0726 or by mail to The New York City Administration for Children\u2019s Services, Records & Compliance Unit, 150 William Street, 5th Floor, New York, NY 10038.</p><br><p><strong><u>Request for Letter stating dates of foster care placement:</u></strong></p><p><strong>Contact the ACS Office of Advocacy</strong></p><p>150 William Street, 1st Fl., New York, NY 10038 </p><p>Hours: 9:00 am \u2013 5:00 pm, Monday \u2013 Friday</p><p>Phone: (212) 676-9421</p><p>Incarcerated parents: Collect (212) 619-1309</p><br><p><strong><u>Request for Adoption Records:</u></strong></p><p>ACS does not have access to adoption records which are sealed by the Court in accordance with Domestic Relations Law \u00a7114. Inquiries regarding an individual\u2019s birth family can be handled at the New York State Department of Health Adoption Information Registry.  Information regarding adoption subsidy should be directed to the ACS customer service for Post Adoption information at 212 676-2825.  The customer service number (automated) addresses families who wish to report a death of an adoptive parent or child, address change, Medicaid issue, direct deposit request, budget letter request or concern regarding payments.</p><br><p><strong><u>Out of State/Jurisdiction Child Protective Record Request from Out of Jurisdiction/State Child Protective Agencies:</u></strong></p><p>If your Agency  currently has an ACTIVE CHILD PROTECTIVE SERVICES investigation, you can send your signed and scanned request on your agency letterhead to the Intake mailbox at <a href=\"mailto:FPS.COIP.Intake.Referral@acs.nyc.gov\">FPS.COIP.Intake.Referral@acs.nyc.gov</a></p><p>The letter MUST include the FOLLOWING statement...</p><p style=\"padding-left: 50px;\">\u201cI certify that the records and reports are necessary in order to conduct a child abuse or maltreatment investigation within our jurisdiction of the subject of the report.  The records and reports shall be used only for purposes of conducting such investigation and will not be redisclosed to any other person or agency.\u201d</p><p>If this statement is NOT accurate do not include it in your letter however under New York Social Services Law \u00a7422(4)(A)(s) we will be unable to forward your request to our legal department that provides copies of child protective investigations.</p>"
+        }
+      },
+      "acronym": "ACS"
+    },
+    {
+      "ein": "0057",
+      "parent_ein": "057",
+      "categories": [
+        "Public Safety"
+      ],
+      "name": "New York City Fire Department",
+      "next_request_number": 1,
+      "default_email": "foilrequests@fdny.nyc.gov",
+      "appeals_email": "foilrequests@fdny.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": true,
+          "categorized": false,
+          "expand_by_default": true,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": false
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": "<div> <p>The Fire Department of the City of New York commonly provides access to the records to the public consistent with Federal, State and NYC laws. Below are instructions for obtaining commonly requested records by Mail, In Person or Online through Open Records, along with forms that are needed to complete the process. Note all mail requests must include a check or money order for applicable fees payable to '<strong>NYC Fire Department</strong>' (no cash accepted) and a stamped, self-addressed envelope. For in person record requests please visit:</p><p><strong>FDNY Public Records Unit</strong><br>9 MetroTech Center - First Floor<br>Brooklyn, N.Y. 11201<br>Use the FLATBUSH AVENUE ENTRANCE<br>Hours of Operation:<br>Monday - Friday 9:00am to 4:00pm (except Holidays)</p><p>Records provided through Open Records/FOIL will be redacted. If you require records with no redactions, then you must serve a 'So Ordered' subpoena. For further instructions please refer to <a href=https://www1.nyc.gov/site/fdny/about/resources/record-requests/records-request.page rel='noopener noreferrer' target=_blank>https://www1.nyc.gov/site/fdny/about/resources/record-requests/records-request.page</a>. </p><p>Please note the following records that you can obtain in person through the Public Records Unit:</p><ul> <li><strong>Copy of a Violation (Summons, Notice of violation, & Violation Order)</strong></li><li><strong>Violation Special Report</strong></li><li><strong>Fuel Tank Special Report (Environmental Assessment Report</strong></li><li><strong>Fire Incident Report</strong></li><li><strong>Ambulance Call Report/Pre-Hospital Care Report</strong></li><li><strong>Letter of Approval</strong></li><li><strong>Letter of Defect (only in person)</strong></li></ul> <hr> <h2>Building Related Reports</h2> <p>These records can be obtained by Mail, In Person or through Open Records (see dropdown below for instructions)</p><p><strong>Copy of a Violation</strong> <ul> <li><u><a href=https://www1.nyc.gov/assets/fdny/downloads/pdf/about/public-record-copy-of-violation.pdf rel='noopener noreferrer' target=_blank>Get Record Request Form</a></u> (PDF)</li></ul> <p><strong>Violation Special Report</strong></p><ul> <li><u><a href=https://www1.nyc.gov/assets/fdny/downloads/pdf/about/public-record-violation-special-report.pdf rel='noopener noreferrer' target=_blank>Get Record Request Form</a></u> (PDF)</li></ul> <p><strong>Fuel Tank Special Report/Environmental Assessment Report</strong></p><ul> <li><u><a href=https://www1.nyc.gov/assets/fdny/downloads/pdf/about/public-record-fuel-tank-special-report.pdf rel='noopener noreferrer' target=_blank>Get Record Request Form</a></u> (PDF)</li></ul> <hr> <h2>Fire Reports</h2> <p><strong>Fire Incident Report</strong><br>These records can be obtained by Mail, In Person or Online through Open Records (see dropdown below for instructions). The Fire Incent Report must be obtained prior to requesting the Fire Marshal Investigation Report to make a determination if there is a Fire Marshal Investigation Report. </p><ul> <li><u><a href=https://www1.nyc.gov/assets/fdny/downloads/pdf/about/public-record-fire-incident-report.pdf rel='noopener noreferrer' target=_blank>Get Record Request Form</a></u> (PDF)</li></ul> <p><strong>Fire Marshal Investigation Report</strong> The following record request can only be handled by mail.</p><ul> <li><u><a href=https://www1.nyc.gov/assets/fdny/downloads/pdf/about/fire-marshal-incident-report.pdf rel='noopener noreferrer' target=_blank>Get Record Request Form</a></u> (PDF)</li></ul> <hr> <h2>Emergency Related Reports (FIRE/EMS)</h2> <p> These records can be obtained by Mail, In Person or Online through <a href=https://fdny.mypatientencounters.com/myrecord rel='noopener noreferrer' target=_blank>https://fdny.mypatientencounters.com/myrecord</a>. Please note ACR records cannot be obtained through Open Records. </p><ul> <li><u><a href=https://www1.nyc.gov/assets/fdny/downloads/pdf/about/public-record-ambulance-call-report.pdf rel='noopener noreferrer' target=_blank>Get Record Request Form</a></u> (PDF)</li><li>Step by step instructions for obtaining ACRs Online</li></ul> <p><strong>911 Call Report (CAD) (NOT Ambulance Call Report/ Pre-Hospital Care Report)</strong><br>These records can be obtained by Mail, In Person or Online through Open Records (see dropdown below for instructions). </p><ul> <li><u><a href=https://www1.nyc.gov/assets/fdny/downloads/pdf/about/public-record-ambulance-call-report.pdf rel='noopener noreferrer' target=_blank>Get Record Request Form</a></u> (PDF) </ul> <h3><u>If your request does not fall under any of these categories please select 'Other Request' below</u></h3></div>"
+        }
+      },
+      "acronym": "FDNY"
+    },
+    {
+      "ein": "0781",
+      "parent_ein": "781",
+      "categories": [
+        "Public Safety"
+      ],
+      "name": "Department of Probation",
+      "next_request_number": 1,
+      "default_email": "FOIL@probation.nyc.gov",
+      "appeals_email": "FOIL@probation.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DOP"
+    },
+    {
+      "ein": "0071",
+      "parent_ein": "071",
+      "categories": [
+        "Social Services"
+      ],
+      "name": "Department of Homeless Services",
+      "next_request_number": 1,
+      "default_email": "foil@hra.nyc.gov",
+      "appeals_email": "foil@hra.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DHS"
+    },
+    {
+      "ein": "0996",
+      "parent_ein": "996",
+      "categories": [
+        "Housing & Development"
+      ],
+      "name": "New York City Housing Authority",
+      "next_request_number": 1,
+      "default_email": "foil@nycha.nyc.gov",
+      "appeals_email": "foil@nycha.nyc.gov",
+      "is_active": false,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "NYCHA"
+    },
+    {
+      "ein": "0017",
+      "parent_ein": "017",
+      "categories": [
+        "Social Services"
+      ],
+      "name": "NYC Office of Emergency Management",
+      "next_request_number": 1,
+      "default_email": "foilrequests@oem.nyc.gov",
+      "appeals_email": "foilrequests@oem.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "OEM"
+    },
+    {
+      "ein": "002H",
+      "parent_ein": "002",
+      "categories": [
+        "Civic Services"
+      ],
+      "name": "Mayor's Office of Contract Services",
+      "next_request_number": 1,
+      "default_email": "mocsfoil@mocs.nyc.gov",
+      "appeals_email": "MOCSFOIL@mocs.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "MOCS"
+    },
+    {
+      "ein": "002Q",
+      "parent_ein": "002",
+      "categories": [
+        "Business"
+      ],
+      "name": "Mayor's Office of Technology and Innovation",
+      "next_request_number": 1,
+      "default_email": "foilrequest@doitt.nyc.gov",
+      "appeals_email": "foilrequest@doitt.nyc.gov",
+      "is_active": false,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "MOTI"
+    },
+    {
+      "ein": "0312",
+      "parent_ein": "312",
+      "categories": [
+        "Civic Services"
+      ],
+      "name": "Conflicts of Interest Board",
+      "next_request_number": 1,
+      "default_email": "FOIL@coib.nyc.gov",
+      "appeals_email": "FOIL@coib.nyc.gov",
+      "is_active": false,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "COIB"
+    },
+    {
+      "ein": "0260",
+      "parent_ein": "260",
+      "categories": [
+        "Social Services"
+      ],
+      "name": "Department of Youth and Community Development",
+      "next_request_number": 1,
+      "default_email": "foil@dycd.nyc.gov",
+      "appeals_email": "foil@dycd.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DYCD"
+    },
+    {
+      "ein": "0131",
+      "parent_ein": "131",
+      "categories": [
+        "Civic Services"
+      ],
+      "name": "Office of Payroll Administration",
+      "next_request_number": 1,
+      "default_email": "FOPA@fisa-opa.nyc.gov",
+      "appeals_email": "appeals@fisa-opa.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "OPA"
+    },
+    {
+      "ein": "0019",
+      "parent_ein": "019",
+      "categories": [
+        "Civic Services"
+      ],
+      "name": "Office of Management and Budget",
+      "next_request_number": 1,
+      "default_email": "foil@omb.nyc.gov",
+      "appeals_email": "foil@omb.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "MOMB"
+    },
+    {
+      "ein": "0860",
+      "parent_ein": "860",
+      "categories": [
+        "Culture & Recreation"
+      ],
+      "name": "Department of Records and Information Services",
+      "next_request_number": 1,
+      "default_email": "foil@records.nyc.gov",
+      "appeals_email": "foil@records.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DORIS"
+    },
+    {
+      "ein": "0868",
+      "parent_ein": "868",
+      "categories": [
+        "Civic Services"
+      ],
+      "name": "Department of Citywide Administrative Services",
+      "next_request_number": 1,
+      "default_email": "foilrequest@dcas.nyc.gov",
+      "appeals_email": "foilrequest@dcas.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DCAS"
+    },
+    {
+      "ein": "0008",
+      "parent_ein": "008",
+      "categories": [
+        "Business",
+        "Civic Services"
+      ],
+      "name": "NYC Office of the Actuary",
+      "next_request_number": 1,
+      "default_email": "foil@actuary.nyc.gov",
+      "appeals_email": "foil@actuary.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "NYCOA"
+    },
+    {
+      "ein": "0858",
+      "parent_ein": "858",
+      "categories": [
+        "Civic Services"
+      ],
+      "name": "Department of Information Technology and Telecommunications",
+      "next_request_number": 1,
+      "default_email": "foilrequest@doitt.nyc.gov",
+      "appeals_email": "foilrequest@doitt.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DOITT"
+    },
+    {
+      "ein": "0134",
+      "parent_ein": "134",
+      "categories": [
+        "Civic Services"
+      ],
+      "name": "Civil Service Commission",
+      "next_request_number": 1,
+      "default_email": "customersvce@nyccsc.nyc.gov",
+      "appeals_email": "customersvce@nyccsc.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "CSC"
+    },
+    {
+      "ein": "0820",
+      "parent_ein": "820",
+      "categories": [
+        "Public Safety"
+      ],
+      "name": "Office of Administrative Trials and Hearings",
+      "next_request_number": 1,
+      "default_email": "foil@oath.nyc.gov",
+      "appeals_email": "foil@oath.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": "<p>FOIL requests often take 25 days or more to process. You might not have to wait that long. Visit the Data / Transparency page, <a href='https://www1.nyc.gov/site/oath/about/data-transparency.page' rel='noopener noreferrer' target=_blank>https://www1.nyc.gov/site/oath/about/data-transparency.page</a> , or use the links below to view the data and informational resources OATH has made available to the public. You will also find information on how you can make a request for records directly with the Clerk’s Office rather than having to file a formal FOIL request. The Clerk’s Office can quickly provide respondents or their representatives with information regarding summonses, bills, affidavits, hearing recordings, and more.</p><p>Obtain Records</p><p>Summonses</p><p>To get a copy of a summons, go to OATH’s Online Summons Finder, <a href='http://a820-ecbticketfinder.nyc.gov/searchHome.action' rel='noopener noreferrer' target=_blank>http://a820-ecbticketfinder.nyc.gov/searchHome.action</a> . Note: Summons Finder currently does not have summonses issued by DCA, TLC or certain summonses issued by the Department of Health and Mental Hygiene, such as restaurant summonses.</p><p>Bills or Invoices</p><p>To get a bill or invoice of outstanding penalties, contact the Clerk’s Office using this online form, <a href='https://www1.nyc.gov/site/oath/clerks-office/email-the-clerks-office.page' rel='noopener noreferrer' target=_blank>https://www1.nyc.gov/site/oath/clerks-office/email-the-clerks-office.page</a> , and select Penalty/Payment Question on the “Message Topic” drop down menu at the top of the form. If your request is related to renewal of a license, you must appear at an OATH Hearings Center, <a href='https://www1.nyc.gov/site/oath/hearings/hearing-in-person.page' rel='noopener noreferrer' target=_blank>https://www1.nyc.gov/site/oath/hearings/hearing-in-person.page</a> .</p><p>Trials Division Decisions or Hearings Division Appeals Decisions</p><p>Search for Trials Division decisions or Hearings Division appeals decisions in the New York Law School CityAdmin Online Library, <a href='https://www.nyls.edu/cityadmin/' rel='noopener noreferrer' target=_blank>https://www.nyls.edu/cityadmin/</a> . If searching for Hearings Division appeals decisions, be sure to select the boxes for OATH Hearings and ECB Appeals before you submit your search to get the best search results. If you are searching using a summons number and your search is unsuccessful, enter the summons number again but with a space between every third digit (ex. 123 456 789X).</p><p>Additional Information about Summonses</p><p>The OATH Hearings Division Case Status dataset, <a href='https://data.cityofnewyork.us/City-Government/OATH-Hearings-Division-Case-Status/jz4z-kudi' rel='noopener noreferrer' target=_blank>https://data.cityofnewyork.us/City-Government/OATH-Hearings-Division-Case-Status/jz4z-kudi</a> , has information about the infraction charged, decision outcome, penalties imposed, payments, and other status information relating to a case. The summonses listed in this dataset are issued and filed at the OATH Hearings Division by City enforcement agencies. The dataset can be searched in numerous and various ways including but not limited to searches by name, address and summons number. The dataset can also be filtered by creating various search parameters and all data can exported into excel spreadsheets or other types of electronic files.</p><p>If you are the Respondent or are authorized by the Respondent:</p><p>Hearings Division Case Records</p><p>If you are the person named as the Respondent on a summons or authorized by the Respondent, to get your Hearings Division case records (other than summonses), contact the Clerk’s Office using this online form, <a href='https://www1.nyc.gov/site/oath/about/records-request.page' rel='noopener noreferrer' target=_blank>https://www1.nyc.gov/site/oath/about/records-request.page</a> , and select Request Documents on the “Message Topic” drop down list at the top of the form.</p><p>Audio Recordings</p><p>If you are the person named as the Respondent on a summons or authorized by the Respondent, to get an audio recording of a hearing when you are not appealing your case, contact the Clerk’s Office using this online form, <a href='https://www1.nyc.gov/site/oath/about/records-request.page' rel='noopener noreferrer' target=_blank>https://www1.nyc.gov/site/oath/about/records-request.page</a> , and select Request Audio Recordings on the “Message Topic” drop down menu at the top of the form.</p><p>To get an audio recording of a hearing because you are filing an appeal, use the One-Click Appeals Form, <a href='https://www1.nyc.gov/site/oath/hearings/one-click-appeals-form.page' rel='noopener noreferrer' target=_blank>https://www1.nyc.gov/site/oath/hearings/one-click-appeals-form.page</a> , and select Respondent’s Extension Request and option to request audio of hearing on the “Request Type” drop down menu at the top of the form.</p><p>If you are not the Respondent or you are not authorized by the Respondent:</p><p>If you need to request documents or audio recordings and you are not the Respondent or authorized by the Respondent to make the request, you must file your request under the Freedom of Information Law (FOIL). Learn how to file a FOIL Request, <a href='https://www1.nyc.gov/site/oath/about/foil-request.page' rel='noopener noreferrer' target=_blank>https://www1.nyc.gov/site/oath/about/foil-request.page</a> , for records from OATH.</p>"
+        }
+      },
+      "acronym": "OATH"
+    },
+    {
+      "ein": "0831",
+      "parent_ein": "831",
+      "categories": [
+        "Business"
+      ],
+      "name": "Business Integrity Commission",
+      "next_request_number": 1,
+      "default_email": "foil@bic.nyc.gov",
+      "appeals_email": "dmandell@bic.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "BIC"
+    },
+    {
+      "ein": "826A",
+      "parent_ein": "826",
+      "categories": [
+        "Housing & Development"
+      ],
+      "name": "Housing Recovery Operations",
+      "next_request_number": 1,
+      "default_email": "foil@recovery.nyc.gov",
+      "appeals_email": "foilappeals@recovery.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "HRO"
+    },
+    {
+      "ein": "0072",
+      "parent_ein": "072",
+      "categories": [
+        "Public Safety"
+      ],
+      "name": "Department of Correction",
+      "next_request_number": 1,
+      "default_email": "recordsaccess@doc.nyc.gov",
+      "appeals_email": "recordsaccess@doc.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DOC"
+    },
+    {
+      "ein": "0125",
+      "parent_ein": "125",
+      "categories": [
+        "Social Services"
+      ],
+      "name": "Department for the Aging",
+      "next_request_number": 1,
+      "default_email": "foil@aging.nyc.gov",
+      "appeals_email": "sfoo@aging.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DFTA"
+    },
+    {
+      "ein": "0003",
+      "parent_ein": "003",
+      "categories": [
+        "Civic Services"
+      ],
+      "name": "Board of Elections",
+      "next_request_number": 1,
+      "default_email": "FOIL@boe.nyc",
+      "appeals_email": "FOIL@boe.nyc",
+      "is_active": false,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "BOE"
+    },
+    {
+      "ein": "0906",
+      "parent_ein": "906",
+      "categories": [
+        "Public Safety"
+      ],
+      "name": "NYC Office of the Special Narcotics Prosecutor",
+      "next_request_number": 1,
+      "default_email": "Tvannoy@snp.nyc.gov",
+      "appeals_email": "foilappeal@cityhall.nyc.gov",
+      "is_active": false,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": null
+    },
+    {
+      "ein": "0816",
+      "parent_ein": "816",
+      "categories": [
+        "Health"
+      ],
+      "name": "Department of Health and Mental Hygiene",
+      "next_request_number": 1,
+      "default_email": "foil@health.nyc.gov",
+      "appeals_email": "recordsaccess@health.nyc.gov",
+      "is_active": false,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DOHMH"
+    },
+    {
+      "ein": "0102",
+      "parent_ein": "102",
+      "categories": [],
+      "name": "New York City Council",
+      "next_request_number": 1,
+      "default_email": "dbarbato@council.nyc.gov",
+      "appeals_email": "dbarbato@council.nyc.gov",
+      "is_active": false,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": null
+    },
+    {
+      "ein": "0069",
+      "parent_ein": "069",
+      "categories": [
+        "Social Services"
+      ],
+      "name": "Human Resources Administration",
+      "next_request_number": 1,
+      "default_email": "foil@hra.nyc.gov",
+      "appeals_email": "foil@hra.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "HRA"
+    },
+    {
+      "ein": "032A",
+      "parent_ein": "032",
+      "categories": [
+        "Social Services"
+      ],
+      "name": "Commission to Combat Police Corruption",
+      "next_request_number": 1,
+      "default_email": "foil@ccpc.nyc.gov",
+      "appeals_email": "ccpcfoilappeals@ccpc.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "CCPC"
+    },
+    {
+      "ein": "0113",
+      "parent_ein": "113",
+      "categories": [
+        "Civic Services"
+      ],
+      "name": "Equal Employment Practices Commission",
+      "next_request_number": 1,
+      "default_email": "mgiraud@eepc.nyc.gov",
+      "appeals_email": "mgiraud@eepc.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "EEPC"
+    },
+    {
+      "ein": "0136",
+      "parent_ein": "136",
+      "categories": [
+        "Housing & Development"
+      ],
+      "name": "Landmarks Preservation Commission",
+      "next_request_number": 1,
+      "default_email": "FOIL@lpc.nyc.gov",
+      "appeals_email": "FOIL@lpc.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "LPC"
+    },
+    {
+      "ein": "0214",
+      "parent_ein": "214",
+      "categories": [
+        "Civic Services"
+      ],
+      "name": "NYC Office of Labor Relations",
+      "next_request_number": 1,
+      "default_email": "sbanks@olr.nyc.gov",
+      "appeals_email": "sbanks@olr.nyc.gov",
+      "is_active": false,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "OLR"
+    },
+    {
+      "ein": "0056",
+      "parent_ein": "056",
+      "categories": [
+        "Public Safety"
+      ],
+      "name": "New York City Police Department",
+      "next_request_number": 1,
+      "default_email": "DOCPROD110C@nypd.org",
+      "appeals_email": "foilappeals@nypd.org",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "footer": "<p>COURTESY&nbsp;&#9679;&nbsp;PROFESSIONALISM&nbsp;&#9679;&nbsp;RESPECT</p>",
+          "signature": {
+            "text": "Very truly yours,<br/>{% if user.signature %}<img src=\"data:image/png;base64,{{ user.signature }}\" />{% else %}<br />{%endif%}<br/>{{ user.name }}<br/>{{ user.title or '' }}<br/>{{ agency.name }}<br/>",
+            "default_user_email": "RICHARD.MANTELLINO@nypd.org"
+          },
+          "letterhead": "<span class=\"mceNonEditable\"><div style=\"overflow: hidden; padding-bottom-10px;\"><span class=\"mceNonEditable\"><div class=\"letter-head-image\"><span class=\"mceNonEditable\"><img height=\"100px\" title=\"City of New York Logo\" src=\"{{ url_for('static', filename='img/nyc_seal_letterhead.png') }}\"alt=\"City of New York Logo\" width=\"110\" height=\"97\" style=\"float: left; width: 110px;\"class=\"mceNonEditable\"/></span></div></span><span class=\"mceNonEditable\"><div style=\"padding-left: 120px;\"><span class=\"mceNonEditable\"><span class=\"mceNonEditable\">POLICE DEPARTMENT</span><span class=\"mceNonEditable\"><br/></span><span class=\"mceNonEditable\">LEGAL BUREAU</span><span class=\"mceNonEditable\"><br/></span><span class=\"mceNonEditable\">F.O.I.L Unit, Room 110C</span><span class=\"mceNonEditable\"><br/></span><span class=\"mceNonEditable\">One Police Plaza</span><span class=\"mceNonEditable\"><br/></span><span class=\"mceNonEditable\">New York, NY  10038</span></span></div></span></div></span>",
+          "generate_letters": true
+        },
+        "custom_request_forms": {
+          "enabled": true,
+          "categorized": false,
+          "expand_by_default": true,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": false
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": "Requests for Payroll/Employment records should be directed to:<br />&emsp;Director Payroll & Benefits Division<br />&emsp;90 Church Street, 12th Floor<br />&emsp;New York, NY 10007<br /><br />Requests for Medical Records should be directed to:<br />&emsp;Medical Division <br />&emsp;1 Lefrak City Plaza, 16th Floor<br />&emsp;59-17 Junction Blvd.<br />&emsp;Corona, NY 11368<br /><br />Criminal History/Background Checks:<br />Requests for Criminal History/Background checks, should be directed to the NYS Division of Criminal Justice Services website:<br /><a rel=\"noreferrer noopener\" target=\"_blank\" href=\"http://www.criminaljustice.ny.gov/ojis/recordreview.htm\">http://www.criminaljustice.ny.gov/ojis/recordreview.htm</a><br /><br />You can also submit a request in writing to:<br />&emsp;New York State Division of Criminal Justice Services<br />&emsp;80 S Swan Street<br />&emsp;Albany, NY 12210<br /><br />Collision Reports:<br />Requestors seeking Collision Reports taken by the New York City Police Department (NYPD) before September 30, 2016 should access the New York State Department of Motor Vehicles website:<br /><a rel=\"noreferrer noopener\" target=\"_blank\" href=\"http://dmv.ny.gov/get-accident-report\">http://dmv.ny.gov/get-accident-report</a><br /><br />You can also submit a request in writing to:<br />&emsp;NYSDMV, MV-198 C Processing<br />&emsp;6 Empire State Plaza<br />&emsp;Albany, NY 12228<br /><br />Requestors seeking Collision Reports taken by the New York City Police Department (NYPD) after September 30, 2016 should access the NYPD's Collision Report website:<br /><a rel=\"noreferrer noopener\" target=\"_blank\" href=\"https://collisionreport.nypdonline.org/\">https://collisionreport.nypdonline.org/</a>"
+        }
+      },
+      "acronym": "NYPD"
+    },
+    {
+      "ein": "0841",
+      "parent_ein": "841",
+      "categories": [
+        "Transportation"
+      ],
+      "name": "Department of Transportation",
+      "next_request_number": 1,
+      "default_email": "foil@dot.nyc.gov",
+      "appeals_email": "FOILAPPEAL@dot.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": "<p>Article 6 of the New York State Public Officers Law (FOIL) allows the public to submit written requests for access to Department of Transportation (DOT) records.</p><p>If you are seeking documents concerning subway or bus service, please see our website at <a rel=\"noopener noreferrer\" target=\"blank\" rel=\"noopener noreferrer\" target=\"blank\" href=\"http://www.nyc.gov/html/dot/html/ferrybus/ferrybus.shtml\">http://www.nyc.gov/html/dot/html/ferrybus/ferrybus.shtml</a>, which states that \"DOT is not responsible for New York City subway or bus service. The <a rel=\"noopener noreferrer\" target=\"blank\" href=\"http://www.mta.info\">MTA</a> operates the subway system, issues <a rel=\"noopener noreferrer\" target=\"blank\" href=\"http://www.mta.info/metrocard/index.html\">MetroCards</a>, and operates the <a rel=\"noopener noreferrer\" target=\"blank\" href=\"http://www.mta.info/mnr/\">Metro-North</a> and <a rel=\"noopener noreferrer\" target=\"blank\" href=\"http://www.mta.info/lirr/\">Long Island</a> Railroads.\"<p><p>Before making your request for DOT records, check if the information you are looking for is already available to the public.</p><ul><li>If you are seeking records concerning your school speed zone, red light, or bus lane camera violation, please visit the web-link (<a rel=\"noopener noreferrer\" target=\"blank\" href=\"https://www.violationinfo.com/\">www.ViolationInfo.com</a>) on the top right hand corner of the Notice of Liability/Certificate Charging the Liability.</li><li><a rel=\"noopener noreferrer\" target=\"blank\" href=\"http://www.nycstreets.net/\">Search DOT street works permits</a></li><li><a rel=\"noopener noreferrer\" target=\"blank\" href=\"http://www.nyc.gov/html/dot/html/motorist/alternate-side-parking.shtml\">Find information about Alternate Side Parking</a></li><li><a rel=\"noopener noreferrer\" target=\"blank\" href=\"http://nycdot.info/\">Check parking regulations throughout the city</a></li><li><a rel=\"noopener noreferrer\" target=\"blank\" href=\"http://www.nyc.gov/html/dot/html/about/datafeeds.shtml\">Find other DOT data, including on traffic advisories, bicycles, Staten Island Ferry, parking, low bridges, trucks and street network changes</a></li><li><a rel=\"noopener noreferrer\" target=\"blank\" href=\"http://nycopendata.socrata.com/\">Check NYC OpenData for data from throughout city government</a></li></ul></p><p>Some tips for a successful FOIL records search:</p><ul><li>Be specific as to the records requested. Indicate the date or date range of records requested. If a request is location based, describe the location either as an address, an intersection or a block</li><li>The request must only be for records and not a question requiring an answer</li><li>Request only the records that you want</li></ul><strong>Cost</strong><p>DOT charges 25¢ per page of paper documents returned. This fee covers photocopying and must be paid before documents will be sent out.</p></div>"        }
+      },
+      "acronym": "DOT"
+    },
+    {
+      "ein": "0030",
+      "parent_ein": "030",
+      "categories": [
+        "Civic Services"
+      ],
+      "name": "Department of City Planning",
+      "next_request_number": 1,
+      "default_email": "foil@planning.nyc.gov",
+      "appeals_email": "foil@planning.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": "<strong>In the \u201cRequest Description\u201d box, please describe with as much specificity as possible the record(s) you are requesting.  Include, as applicable, the following information:</strong><br /><i><ul><li>Project name</li><li>Address</li><li>Borough(s)</li><li>Block numbers(s)</li><li>Lot number(s)</li><li>CP or ULURP number(s)</li><li>CEQR number(s)</li><li>Relevant dates</li><li>Type of record(s)</li></ul></i><strong>Please note: </strong>Broadly worded requests seeking \u201cany\u201d or \u201call\u201d records related to a subject matter have the potential to implicate hundreds if not thousands of records, including emails. Requests for emails require an extensive search, and a determination regarding such a broad request typically takes a minimum of sixty (60) business days. If making a request for emails, when possible, the specific sender(s) and recipient(s) should be identified, as well as specific date ranges.<br /><br />See more information about the <a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://www1.nyc.gov/assets/planning/download/pdf/about/proc_pub_inspection.pdf?r=0518\">Department's FOIL procedures</a>."
+        }
+      },
+      "acronym": "DCP"
+    },
+    {
+      "ein": "810A",
+      "parent_ein": "810",
+      "categories": [
+        "Housing & Development"
+      ],
+      "name": "Loft Board",
+      "next_request_number": 1,
+      "default_email": "nycloftfoilrequest@buildings.nyc.gov",
+      "appeals_email": "nycloftfoilrequest@buildings.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": null
+    },
+    {
+      "ein": "002I",
+      "parent_ein": "002",
+      "categories": [
+        "Public Safety"
+      ],
+      "name": "Mayor's Office of Criminal Justice",
+      "next_request_number": 1,
+      "default_email": "mocj@cityhall.nyc.gov",
+      "appeals_email": "mocj@cityhall.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "MOCJ"
+    },
+    {
+      "ein": "002M",
+      "parent_ein": "002",
+      "categories": [
+        "Culture & Recreation"
+      ],
+      "name": "Mayor's Office of Media and Entertainment",
+      "next_request_number": 1,
+      "default_email": "foil@media.nyc.gov",
+      "appeals_email": "foil@media.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "MOME"
+    },
+    {
+      "ein": "002F",
+      "parent_ein": "002",
+      "categories": [
+        "Social Services"
+      ],
+      "name": "Mayor's Office for People with Disabilities",
+      "next_request_number": 1,
+      "default_email": "MOPDFOIL@cityhall.nyc.gov",
+      "appeals_email": "MOPDFOIL@cityhall.nyc.gov",
+      "is_active": false,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "MOPD"
+    },
+    {
+      "ein": "0063",
+      "parent_ein": "063",
+      "categories": [
+        "Social Services"
+      ],
+      "name": "Department of Veterans' Services",
+      "next_request_number": 1,
+      "default_email": "foil@veterans.nyc.gov",
+      "appeals_email": "foil@veterans.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DVS"
+    },
+    {
+      "ein": "0827",
+      "parent_ein": "827",
+      "categories": [
+        "Environment"
+      ],
+      "name": "Department of Sanitation",
+      "next_request_number": 1,
+      "default_email": "foil@dsny.nyc.gov",
+      "appeals_email": "foil@dsny.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DSNY"
+    },
+    {
+      "ein": "816A",
+      "parent_ein": "816",
+      "categories": [
+        "Civic Services",
+        "Public Safety"
+      ],
+      "name": "NYC Office of the Chief Medical Examiner",
+      "next_request_number": 1,
+      "default_email": "foil@ocme.nyc.gov",
+      "appeals_email": "ocmefoilappeals@ocme.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "OCME"
+    },
+    {
+      "ein": "002K",
+      "parent_ein": "002",
+      "categories": [
+        "Environment"
+      ],
+      "name": "Mayor's Office of Environmental Remediation",
+      "next_request_number": 1,
+      "default_email": "foil-oer@cityhall.nyc.gov",
+      "appeals_email": "foil-oer@cityhall.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "OER"
+    },
+    {
+      "ein": "0032",
+      "parent_ein": "032",
+      "categories": [
+        "Public Safety"
+      ],
+      "name": "Department of Investigation",
+      "next_request_number": 1,
+      "default_email": "foil@doi.nyc.gov",
+      "appeals_email": "msiller@doi.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "DOI"
+    },
+    {
+      "ein": "0127",
+      "parent_ein": "127",
+      "categories": [
+        "Civic Services"
+      ],
+      "name": "Financial Information Services Agency",
+      "next_request_number": 1,
+      "default_email": "FISAFOIL@fisa-opa.nyc.gov",
+      "appeals_email": "appeals@fisa-opa.nyc.gov",
+      "is_active": true,
+      "agency_features": {
+        "letters": {
+          "generate_letters": false
+        },
+        "custom_request_forms": {
+          "enabled": false,
+          "categorized": false,
+          "expand_by_default": false,
+          "category_info_text": "",
+          "category_warning_text": "",
+          "multiple_request_types": false,
+          "description_hidden_by_default": true
+        },
+        "monitor_agency_requests": [],
+        "specific_request_instructions": {
+          "text": ""
+        }
+      },
+      "acronym": "FISA"
+    }
+  ]
+}

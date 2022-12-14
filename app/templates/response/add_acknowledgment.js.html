@@ -1,0 +1,351 @@
+<script type="text/javascript">
+    "use strict";
+
+    $(function () {
+        var dateSelectVal = "-1";
+
+        var form = $("#add-acknowledgment");
+        var first = form.find(".first");
+        var second = form.find(".second");
+        var third = form.find(".third");
+        var fourth = form.find(".fourth");
+        var point_of_contact = form.find("#point-of-contact");
+
+        var next1 = first.find(".next");
+        var next2 = second.find(".next");
+        var next3 = third.find(".next");
+        var prev2 = second.find(".prev");
+        var prev3 = third.find(".prev");
+        var prev4 = fourth.find(".prev");
+        var submit = fourth.find(".submit");
+
+        var method = first.find("#acknowledgment-method");
+        var email_days = second.find("#acknowledgment-email-days");
+        var email_date = second.find("#acknowledgment-email-date");
+        var email_div = second.find("#acknowledgment-email");
+        var email_info = second.find("#acknowledgment-email-info-text");
+
+        var letter_days = second.find("#acknowledgment-letter-days");
+        var letter_date = second.find("#acknowledgment-letter-date");
+        var letter_div = second.find("#acknowledgment-letter");
+        var letter_info = second.find("#letter-template-id");
+        var generate_letters_enabled = form.find("#generate-letters-enabled").val();
+
+        var edit_body_header = third.find('#edit-body-header');
+
+        var editor = $('#acknowledgment-editor');
+        var confirmation = $('#acknowledgment-confirmation');
+
+        tinymce.init({
+            menubar: false,
+            // sets tinymce to enable only on specific textareas classes
+            mode: 'specific_textareas',
+            // selector for tinymce textarea classes is set to 'tinymce-area'
+            editor_selector: 'tinymce-acknowledgement-info',
+            elementpath: false,
+            convert_urls: false,
+            height: 300,
+            plugins: ['noneditable', 'preventdelete', 'lists'],
+            toolbar: ['undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent add_check'],
+            forced_root_block: '',
+            setup: function (editor) {
+                editor.ui.registry.addButton('add_check', {
+                    text: 'Add  ✔',
+                    onAction: function () {
+                        editor.insertContent('&nbsp;&#10004;&nbsp;');
+                    }
+                });
+
+                editor.on('keyup', function () {
+                    let currentLength = tinyMCE.get('acknowledgment-email-info-text').getContent({format: 'text'}).trim().length;
+                    characterCounter('#acknowledgment-info-character-count', 5000, currentLength);
+                    if (currentLength > 5000) {
+                        next2.prop('disabled', true);
+                        $('#acknowledgement-info-maxlength-error').show();
+                    }
+                    else {
+                        next2.prop('disabled', false);
+                        $('#acknowledgement-info-maxlength-error').hide();
+                    }
+                });
+            }
+        });
+
+        // Reveal / Hide Letter Generation
+        if (generate_letters_enabled === "True") {
+            first.show();
+            second.hide();
+        } else {
+            first.hide();
+            second.show();
+            letter_div.hide();
+            prev2.hide();
+        }
+
+        // Parsley
+        var required = [email_date, email_days, letter_date, letter_days, letter_info, method];
+        for (var i = 0; i < required.length; i++) {
+            required[i].attr("data-parsley-required", "");
+        }
+        email_info.attr("data-parsley-maxlength", "5000");
+
+        // Custom Validation Messages
+        method.attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, acknowledgement method is required.</strong> Please select an acknowledgment method from the drop-down menu.");
+        email_days.attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, estimated time-frame for the request is required.</strong> Please select an estimated time-frame from the drop-down menu or choose a custom due date");
+        letter_days.attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, estimated time-frame for the request is required.</strong> Please select an estimated time-frame from the drop-down menu or choose a custom due date.");
+        letter_info.attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, a template is required.</strong> Please select a template from the drop-down menu.");
+
+        // Date Picker - Email
+        holiday_dates = {{ holidays | safe }};
+        email_date.datepicker({
+            dateFormat: "mm/dd/yy",
+            daysOfWeekDisabled: [0, 6],
+            beforeShowDay: notHolidayOrWeekend,
+            minDate: "{{ request.due_date.strftime('%m/%d/%Y') }}"
+        });
+        email_date.keydown(false);
+
+        // Date Picker - Letter
+        letter_date.datepicker({
+            dateFormat: "mm/dd/yy",
+            daysOfWeekDisabled: [0, 6],
+            beforeShowDay: notHolidayOrWeekend,
+            minDate: "{{ request.due_date.strftime('%m/%d/%Y') }}"
+        });
+        letter_date.keydown(false);
+
+        // Reveal/Hide Date Picker - Email
+        email_days.change(function () {
+            if ($(this).val() === dateSelectVal) {
+                email_date.parent().show();
+                email_info.attr("data-parsley-required", "");
+                email_info.attr("data-parsley-required-message",
+                    "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+                    "<strong>Error, additional information is required when selecting a custom due date.</strong>");
+                email_info.attr("data-parsley-minlength", 20);
+                email_info.attr("data-parsley-minlength-message",
+                    "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+                    "<strong>Error, additional information must have 20 characters or more.<strong>");
+
+            } else {
+                email_date.parent().hide();
+                email_info.removeAttr("data-parsley-required", "");
+                email_info.removeAttr("data-parsley-minlength", 20);
+                email_info.removeClass("parsley-error");
+                second.find(".parsley-errors-list").children().remove();
+            }
+        });
+
+        // Reveal/Hide Date Picker - Letter
+        letter_days.change(function () {
+            if ($(this).val() === dateSelectVal) {
+                letter_date.parent().show();
+            } else {
+                letter_date.parent().hide();
+                second.find(".parsley-errors-list").children().remove();
+            }
+        });
+
+        next1.click(function (e) {
+            method.parsley().validate();
+            if (!(method.parsley().isValid())) {
+                e.preventDefault();
+                return false;
+            }
+            if (method.val() === 'emails') {
+                letter_div.hide();
+                email_div.show();
+            } else {
+                letter_div.show();
+                email_div.hide();
+            }
+            first.hide();
+            second.show();
+        });
+
+        next2.click(function (e) {
+            tinyMCE.triggerSave();
+
+            if (email_date.is(":visible")) {
+                // If custom due date is selected, email_info must be validated.
+                email_date.parsley().validate();
+                email_info.parsley().validate();
+                if (!(email_date.parsley().isValid() && email_info.parsley().isValid())) {
+                    // if either email_date or email_info are invalid, show an error.
+                    e.preventDefault();
+                    return false;
+                }
+            }
+            if (letter_date.is(":visible")) {
+                letter_date.parsley().validate();
+                if (!(letter_date.parsley().isValid())) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+
+            if (method.val() === 'emails') {
+                email_days.parsley().validate();
+                email_info.parsley().validate(); // for max length
+            }
+            if (method.val() === 'letters') {
+                letter_days.parsley().validate();
+                letter_info.parsley().validate(); // ensure exists
+            }
+
+            if (method.val() === 'emails' && !(email_days.parsley().isValid() && email_info.parsley().isValid())) {
+                e.preventDefault();
+                return false;
+            } else if (method.val() === 'letters' && !(letter_days.parsley().isValid() && letter_info.parsley()
+                .isValid())) {
+                e.preventDefault();
+                return false;
+            } else {
+                if (method.val() === 'emails') {
+                    $.ajax({
+                        url: "/response/email",
+                        type: "POST",
+                        data: {
+                            request_id: "{{ request.id }}",
+                            type: "acknowledgment",
+                            acknowledgment: JSON.stringify({
+                                days: email_days.val(),
+                                date: email_date.val(),
+                                info: tinyMCE.get('acknowledgment-email-info-text').getContent()
+                            }),
+                            tz_name: jstz.determine().name()
+                        },
+                        success: function (data) {
+                            var emailContent = third.find(".email-content-hidden");
+                            emailContent.html(data.template);
+                            flask_moment_render_all();
+                            tinyMCE.get("acknowledgment-body").setContent(emailContent.html());
+                            editor.unblock();
+                            next3.prop('disabled', false);
+                        }
+                    });
+
+                    edit_body_header.html("Edit Email Body");
+
+                    second.hide();
+                    third.show();
+                } else {
+                    $.ajax({
+                        url: "/response/letter",
+                        type: "POST",
+                        data: {
+                            request_id: "{{ request.id }}",
+                            type: "acknowledgment",
+                            acknowledgment: JSON.stringify({
+                                days: letter_days.val(),
+                                date: letter_date.val(),
+                                letter_template: letter_info.val(),
+                                point_of_contact: point_of_contact.val()
+                            }),
+                            tz_name: jstz.determine().name()
+                        },
+                        success: function (data) {
+                            var emailContent = third.find(".email-content-hidden");
+                            emailContent.html(data.template);
+                            flask_moment_render_all();
+                            tinyMCE.get("acknowledgment-body").setContent(emailContent.html());
+                            editor.unblock();
+                            next3.prop('disabled', false);
+                        }
+                    });
+
+                    edit_body_header.html("Edit Letter Body");
+
+                    second.hide();
+                    third.show();
+                }
+                // Block tinymce until content is fully loaded by ajax
+                editor.block({
+                    message: '<div class=\"col-sm-12 loading-container\"><div class=\"loading-spinner\">' +
+                    '<span class=\"sr-only\">Loading content...</span></div></div>'
+                });
+                next3.prop('disabled', true);
+            }
+        });
+
+        next3.click(function () {
+            tinyMCE.triggerSave();
+
+            if (method.val() === 'emails') {
+                $.ajax({
+                    url: "/response/email",
+                    type: "POST",
+                    data: {
+                        request_id: "{{ request.id }}",
+                        type: "acknowledgment",
+                        email_content: third.find("#acknowledgment-body").val()
+                    },
+                    success: function (data) {
+                        fourth.find(".summary").html(data.template);
+                        fourth.find("input[name='summary']").val(data.template);
+                        fourth.find("input[name='tz-name']").val(jstz.determine().name());
+                        fourth.find(".confirmation-header").text(data.header);
+                        fourth.find(".method").val(method.val());
+                        confirmation.unblock();
+                        submit.prop('disabled', false);
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: "/response/letter",
+                    type: "POST",
+                    data: {
+                        request_id: "{{ request.id }}",
+                        type: "acknowledgment",
+                        letter_content: third.find("#acknowledgment-body").val()
+                    },
+                    success: function (data) {
+                        fourth.find(".summary").html(data.template);
+                        fourth.find("input[name='summary']").val(data.template);
+                        fourth.find("input[name='tz-name']").val(jstz.determine().name());
+                        fourth.find(".confirmation-header").text(data.header);
+                        fourth.find(".method").val(method.val());
+                        confirmation.unblock();
+                        submit.prop('disabled', false);
+                    }
+                })
+            }
+            third.hide();
+            fourth.show();
+            // Block confirmation until content is fully loaded by ajax
+            confirmation.block({
+                message: '<div class=\"col-sm-12 loading-container\"><div class=\"loading-spinner\">' +
+                '<span class=\"sr-only\">Loading content...</span></div></div>'
+            });
+            submit.prop('disabled', true);
+        });
+
+        prev2.click(function () {
+            second.hide();
+            first.show();
+        });
+
+        prev3.click(function () {
+            third.hide();
+            second.show();
+        });
+
+        prev4.click(function () {
+            fourth.hide();
+            third.show();
+        });
+
+        form.submit(function () {
+            submit.attr("disabled", true);
+        });
+
+    });
+</script>

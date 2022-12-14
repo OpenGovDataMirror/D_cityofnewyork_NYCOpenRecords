@@ -1,0 +1,77 @@
+<form id="add-closing" action="/response/closing/{{ request.id }}" method="POST">
+
+    {{ close_request_form.csrf_token }}
+    <input type="hidden" id="generate-letters-enabled" name="generate_letters_enabled"
+           value="{{ generate_letters_enabled }}"/>
+    <input type="hidden" id="point-of-contact" name="point_of_contact" value="{{ current_point_of_contact['user_guid'] }}"/>
+
+    <div class="col-sm-9">
+        <fieldset>
+            <legend>
+                Close Request
+                <small data-toggle="popover" data-placement="right" data-trigger="hover" title="Closing a Request"
+                       data-content="This function closes the request.">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                </small>
+            </legend>
+            <div class="first" hidden>
+                {% if generate_letters_enabled %}
+                    <div class="form-group">
+                        <label for="closing-method">Closing Method</label>
+                        <select id="closing-method" name="method" class="disable-enter-submit form-control">
+                            <option value="" selected="selected" disabled="disabled">None selected</option>
+                            <option value="emails">Email</option>
+                            <option value="letters">Letter</option>
+                        </select>
+                    </div>
+                    <button type="button" class="next pull-right btn btn-primary">Next</button>
+                {% else %}
+                    <input type="hidden" id="closing-method" name="method" value="emails"/>
+                {% endif %}
+            </div>
+
+            <div class="second" hidden>
+                <div id="closing-email">
+                    <div class="form-group">
+                        {{ close_request_form.reasons.label }}<br>
+                        {{ close_request_form.reasons(id="closing-reason-ids",
+                                                     class="disable-enter-submit form-control",
+                                                     size=10) | safe }}
+                    </div>
+                </div>
+                <div id="closing-letter">
+                    <div class="alert alert-warning">
+                        Please remember to generate an envelope before you close this request.
+                    </div>
+                    <div class="form-group">
+                        {{ generate_closing_letter_form.letter_templates.label }}<br>
+                        {{ generate_closing_letter_form.letter_templates(id="letter-template-id",
+                                                 class="disable-enter-submit form-control") | safe }}
+                    </div>
+                </div>
+                <button type="button" class="prev pull-left btn btn-default">Prev</button>
+                <button type="button" class="next pull-right btn btn-primary">Next</button>
+            </div>
+
+
+            <div class="third" hidden>
+                <h4 id="edit-body-header">Edit Email Body</h4>
+                <div id="closing-editor" class="form-group">
+                    <div class="email-content-hidden" hidden></div>
+                    <textarea title="closing-body" name="closing-body"
+                              class="tinymce-area"></textarea>
+                </div>
+                <button type="button" class="prev pull-left btn btn-default">Prev</button>
+                <button type="button" class="next pull-right btn btn-primary">Next</button>
+            </div>
+
+            <div class="fourth" hidden>
+                <h4 class="confirmation-header"></h4>
+                <div id="closing-confirmation" class="wrap-text summary"></div>
+                <input type="hidden" name="summary">
+                <button type="button" class="prev pull-left btn btn-default">Prev</button>
+                <button type="submit" class="submit pull-right btn btn-success">Submit</button>
+            </div>
+        </fieldset>
+    </div>
+</form>

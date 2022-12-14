@@ -1,0 +1,155 @@
+<div class="request-info">
+    <div class="well col-sm-9" role="main">
+        <div class="control-widget">
+            <h3 class="text-muted" id="request-id">{{ request.id }}
+                <small data-toggle="popover" data-placement="right" data-trigger="hover" title="FOIL Number"
+                       data-content="You can use your FOIL number to track your request on the View Requests page.">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                </small>
+            </h3>
+            <div class="row">
+                <div class="request-label lead col-sm-1">Title:</div>
+                <!-- privacy options for request title -->
+                {% if permissions['edit_title_privacy'] and request.status != status.CLOSED %}
+                    <div class="btn-group col-sm-push-8" data-toggle="buttons">
+                        {% if request.privacy['title'] %}
+                            <label class="title-privacy-btn btn btn-default" data-active-class="primary">
+                                <input type="radio" value="false">Public
+                            </label>
+                            <label class="title-privacy-btn btn btn-default active" data-active-class="primary">
+                                <input type="radio" value="true">Private
+                            </label>
+                        {% else %}
+                            <label class="title-privacy-btn btn btn-default active" data-active-class="primary">
+                                <input type="radio" value="false">Public
+                            </label>
+                            <label class="title-privacy-btn btn btn-default" data-active-class="primary">
+                                <input type="radio" value="true">Private
+                            </label>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                <div class="request-title-text lead">
+                    {% if permissions['edit_title'] and request.status != status.CLOSED %}
+                        <!-- editable area for request title -->
+                        <a href="#" class="xedit" id="title">{{ request.title }}</a>
+                    {% else %}
+                        {% if request.show_title %}
+                            {{ request.title }}
+                        {% else %}
+                            {% if request.was_acknowledged or request.status == "Closed" %}
+                                <p>Private</p>
+                            {% else %}
+                                <i>Under Review</i>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <br>
+            {% if current_user.is_agency or is_requester %}
+                {% if (custom_request_forms_enabled and description_hidden_by_default == false) or custom_request_forms_enabled == false %}
+                    <div class="row">
+                        <div class="request-label lead">Description:</div>
+                        <div class="request-description-text lead">{{ request.description }}</div>
+                        <br>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if request.custom_metadata and (current_user.is_agency or is_requester) %}
+                <div class="row">
+                    <div class="request-label lead">Request Information:</div>
+                    <br>
+                    {% for form_number,form_values in request.custom_metadata|dictsort %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <a data-toggle="collapse"
+                                       href="#collapse-{{ loop.index }}">{{ form_values['form_name'] }}</a>
+                                </div>
+                            </div>
+                            <div id="collapse-{{ loop.index }}"
+                                 class="panel-collapse collapse {% if expand_by_default %}in{% endif %}">
+                                <div class="panel-body lead" style="padding: 15px !important;">
+                                    {% for field_number,field_values in form_values['form_fields']|dictsort %}
+                                        <div class="request-label lead">{{ field_values['field_name'] }}:</div>
+                                        {% if field_values['field_value'] is iterable and field_values['field_value'] is not string %}
+                                            {% for value in field_values['field_value'] %}
+                                                {{ value }}
+                                                {% if field_values['field_value']|length > 1 and loop.index != field_values['field_value']|length %}
+                                                    , {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            <div class="request-description-text">{{ field_values['field_value'] }}</div>
+                                        {% endif %}
+                                        <br/>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="row">
+                {% if show_agency_request_summary %}
+                    <div class="request-label lead col-sm-6">Agency Request Summary:</div>
+                {% endif %}
+                <!-- privacy options for agency request summary -->
+                <div class="btn-group col-sm-push-3" data-toggle="buttons">
+                    {% if permissions['edit_agency_request_summary_privacy'] and request.status != status.CLOSED %}
+                        {% if request.privacy['agency_request_summary'] %}
+                            <label class="desc-privacy-btn btn btn-default" data-active-class="primary">
+                                <input type="radio" value="false">Public
+                            </label>
+                            <label class="desc-privacy-btn btn btn-default active" data-active-class="primary">
+                                <input type="radio" value="true">Private
+                            </label>
+                        {% else %}
+                            <label class="desc-privacy-btn btn btn-default active" data-active-class="primary">
+                                <input type="radio" value="false">Public
+                            </label>
+                            <label class="desc-privacy-btn btn btn-default" data-active-class="primary">
+                                <input type="radio" value="true">Private
+                            </label>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="agency-request-summary-text lead">
+                    {% if permissions['edit_agency_request_summary'] and request.status != status.CLOSED %}
+                        <!-- editable area for agency request summary -->
+                        <a href="#" class="xedit"
+                           id="agency_request_summary">{{ request.agency_request_summary or "" }}</a>
+                    {% else %}
+                        {% if show_agency_request_summary %}
+                            {{ request.agency_request_summary or "" }}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            {% if current_user in request.agency_users %}
+                <br>
+                <div class="row">
+                    <div class="request-label lead">This requester can be contacted by:</div>
+                    <div class="lead">
+                        {% if request.requester.email %}
+                            Email<br>
+                        {% endif %}
+                        {% if request.requester.phone_number %}
+                            Phone number<br>
+                        {% endif %}
+                        {% if request.requester.fax_number %}
+                            Fax number<br>
+                        {% endif %}
+                        {% if request.requester.mailing_address['address_one'] and request.requester.mailing_address['city'] %}
+                            Mail
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

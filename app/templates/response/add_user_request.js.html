@@ -1,0 +1,90 @@
+<script type="text/javascript">
+    "use strict";
+
+    $(function () {
+        var form = $("#add-user-request");
+        var first = form.find(".first");
+        var second = form.find(".second");
+
+        var next = first.find(".next");
+        var prev = second.find(".prev");
+        var submit = second.find(".submit");
+
+        var options = first.find("#add_options");
+        var role = first.find("#role");
+        var user = first.find("#user");
+        var permission = first.find("#permission");
+
+        var confirmation = $('#add-user-confirmation');
+
+        permission.find("option").mousedown(function (e) {
+            e.preventDefault();
+            permission.focus();
+            $(this).prop("selected", !$(this).prop("selected"));
+            return false;
+        });
+
+        var ua = window.navigator.userAgent;
+        user.change(function () {
+            if (user.val() != 0) {  // if this choice actually pertains to a user
+                // set the role to Anonymous User
+                first.find("#role option:contains('Anonymous User')").prop("selected", true);
+                permission.val(null);
+                if (~ua.indexOf("MSIE ") || ~ua.indexOf("Trident/") || ~ua.indexOf("Edge")) {
+                    first.find("#ie-message").show();
+                }
+                options.show();
+            } else {
+                options.hide()
+            }
+        });
+
+        next.click(function () {
+            $.ajax({
+                url: "/response/email",
+                type: "POST",
+                data: {
+                    request_id: "{{ request.id }}",
+                    type: "user_request_added",
+                    permission: permission.val(),
+                    guid: user.val()
+                },
+                success: function (data) {
+                    $(".email-summary").html(data.template);
+                    $("#user_name").text(data.name);
+                    confirmation.unblock();
+                    submit.prop('disabled', false);
+                }
+            });
+            first.hide();
+            second.show();
+            confirmation.block({
+                message: '<div class=\"col-sm-12 loading-container\"><div class=\"loading-spinner\">' +
+                '<span class=\"sr-only\">Loading content...</span></div></div>'
+            });
+            submit.prop('disabled', true);
+        });
+
+        prev.click(function () {
+            second.hide();
+            first.show();
+        });
+
+        role.change(function () {
+            $.ajax({
+                url: "/permissions/api/v1.0/" + role.val(),
+                type: "GET",
+                success: function (data) {
+                    permission.children().each(function () {
+                        if (data.indexOf(parseInt($(this).val())) !== -1) {
+                            $(this).prop("selected", true);
+                        } else {
+                            $(this).prop("selected", false);
+                        }
+                    })
+
+                }
+            });
+        });
+    });
+</script>

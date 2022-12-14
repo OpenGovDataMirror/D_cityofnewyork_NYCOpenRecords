@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Search Requests{% endblock %}
+
+{% block custom_css %}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/plugins/jquery-ui.css') }}"/>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/view_all.css') }}"/>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/styles.css') }}"/>
+{% endblock %}
+
+{% block content %}
+    {% if current_user.is_agency %}
+        <input type="hidden" id="is-agency-user" value="true">
+        <select class="hidden" id="user-agencies">
+            {% for agency in user_agencies %}
+                <option value="{{ agency }}">{{ agency }}</option>
+            {% endfor %}
+        </select>
+    {% else %}
+        <input type="hidden" id="is-agency-user" value="false">
+    {% endif %}
+    <form id="search-form" action="{{ url_for("search.requests_doc", doc_type="csv") }}" method="get" target="_blank"
+          rel="noreferrer">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Explore OpenRecords Requests</h1>
+                <p>OpenRecords makes every public request available using the View Requests option, including
+                    messages or documents uploaded by agency staff. By searching the requests, you may find the
+                    information you are interested in before requesting documents. This will save time for you
+                    and for the City of New York.</p>
+            </div>
+            <div class="col-sm-12 well form-group">
+                {% if current_user.is_agency %}
+                    {% include 'request/_agency_search_form.html' %}
+                {% else %}
+                    {% include 'request/_public_search_form.html' %}
+                {% endif %}
+            </div>
+            {% if current_user.is_agency %}
+                <div class="row">
+                    <div class="col-sm-12 no-pad-left no-pad-right">
+                        <button type="submit" id="generate-document" class="btn btn-primary">Generate Results CSV
+                        </button>
+                        <span id="generate-document-error"></span>
+                    </div>
+                </div>
+                <br>
+            {% endif %}
+            <div class="alert alert-warning" id="redact-results-alert" aria-live="polite" tabindex="0" hidden>
+                Please note that some requests in the results as well as the CSV export will be redacted if they belong
+                to an agency other than your own. This is to protect the confidential information of those requesters.
+            </div>
+        </div>
+        <!-- hidden inputs with out-of-form counterparts must have identical values -->
+        <input type="hidden" name="tz_name" value="America/New_York">
+        <input type="hidden" name="start" value="">
+        <input type="hidden" name="sort_date_submitted">
+        <input type="hidden" name="sort_date_due">
+        <input type="hidden" name="sort_title">
+    </form>
+    <div class="search-results col-sm-12">
+        <div class="row">
+            <div id="results"></div>
+            <!--Pagination-->
+            <div id="pagination" class="pagination well">
+                <div class="pagination-wrap">
+                    <a href="#" role="button" id="prev" class="btn btn-primary" aria-label="Previous">Prev</a>
+                    <span id="page-info" class="pagination-text"></span>
+                    <a href="#" role="button" id="next" class="btn btn-primary">Next</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% if not current_user.is_agency %}
+            <div class="col-sm-12">
+                <div class="newrecord-wrap">
+                    <a href="/request/new" role="button"
+                       class="btn btn-lg btn-block btn-primary request-record-button-size">Request a New Record</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block custom_script %}
+    <script type="text/javascript">$(function () {
+        holiday_dates = {{ holidays | safe }};
+    });</script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/request/search.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/plugins/jquery.mask.js') }}"></script>
+{% endblock %}

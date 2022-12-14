@@ -1,0 +1,240 @@
+<script type="text/javascript">
+    "use strict";
+
+    $(function () {
+        var form = $("#add-reopening");
+        var first = form.find(".first");
+        var second = form.find(".second");
+        var third = form.find(".third");
+        var point_of_contact = form.find("#point-of-contact");
+
+        var next1 = first.find(".next");
+        var next2 = second.find(".next");
+        var prev2 = second.find(".prev");
+        var prev3 = third.find(".prev");
+        var submit = third.find(".submit");
+
+        var edit_body_header = second.find("#edit-body-header");
+
+        var method = first.find("#reopening-method");
+        var letter_template_group = first.find("#reopening-letter-template-group");
+        var letter_template = first.find("#reopening-letter-template");
+        var reason_group = first.find("#reopening-reason-id-group");
+        var reason = first.find("#reopening-reason-id");
+        var date = first.find("#reopening-date");
+
+        var editor = $('#reopening-editor');
+        var confirmation = $('#reopening-confirmation');
+
+        // Parsley
+        method.attr("data-parsley-required", "");
+        date.attr("data-parsley-required", "");
+
+        // Apply custom validation messages
+        method.attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, re-opening method is required.</strong> Please select a re-opening method from the drop-down menu.");
+        date.attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, new due date is required.</strong> Please select a date using the date picker.");
+        letter_template.attr("data-parsley-required-message",
+            "<span class=\"glyphicon glyphicon-exclamation-sign\"></span>&nbsp;" +
+            "<strong>Error, template is required.</strong> Please select a letter template from the drop-down menu.");
+
+        // Setup the reason dropdown
+
+        reason_group.show();
+        reason.attr("data-parsley-required", "");
+        $.ajax({
+            url: "/agency/api/v1.0/reasons/{{ request.agency.ein }}/re-opening",
+            success: function (data) {
+                var reasons = data['re-opening'];
+                for (var i = 0; i < reasons.length; i++) {
+                    var opt = document.createElement("option");
+                    opt.innerHTML = reasons[i][1];
+                    opt.value = reasons[i][0];
+                    reason.append(opt);
+                }
+            }
+        });
+
+        // Date Picker Setup
+        holiday_dates = {{ holidays | safe }};
+        date.datepicker({
+            dateFormat: "mm/dd/yy",
+            daysOfWeekDisabled: [0, 6],
+            beforeShowDay: notHolidayOrWeekend,
+            minDate: 0
+        }).keydown(function (e) {
+            // prevent keyboard input except for tab
+            if (e.keyCode !== 9) {
+                e.preventDefault();
+            }
+        });
+
+        method.change(function () {
+            // Handles validation changes caused by changing the value in the method dropdown
+            if (method.val() === 'letters') {
+                // Make letter template required in addition to reason if letter method selected.
+                letter_template_group.show();
+                letter_template.attr("data-parsley-required", "");
+                $.ajax({
+                    url: "/agency/api/v1.0/letter_templates/{{ request.agency.ein }}/re-opening",
+                    success: function (data) {
+                        var templates = data['re-opening'];
+                        for (var i = 0; i < templates.length; i++) {
+                            var opt = document.createElement("option");
+                            opt.innerHTML = templates[i][1];
+                            opt.value = templates[i][0];
+                            letter_template.append(opt);
+                        }
+                    }
+                });
+            } else if (method.val() === 'emails') {
+                // Hide the letter template if the email value is selected (default option).
+                letter_template_group.hide();
+                letter_template.removeAttr();
+                letter_template.empty().append("<option value='' selected disabled>None Selected</option>");
+            }
+        });
+
+        next1.click(function () {
+            // Validate standard fields
+            method.parsley().validate();
+            date.parsley().validate();
+            reason.parsley().validate();
+
+            if (letter_template_group.is(':visible')) {
+                // Only validate the letter template if it is visible (method = 'letters')
+                letter_template.parsley().validate();
+            }
+
+            if (method.parsley().isValid() && date.parsley().isValid() && reason.parsley().isValid()) {
+                if (method.val() === 'emails') {
+                    $.ajax({
+                        url: "/response/email",
+                        type: "POST",
+                        data: {
+                            request_id: "{{ request.id }}",
+                            type: "re-opening",
+                            date: date.val(),
+                            reason: reason.val(),
+                            tz_name: jstz.determine().name()
+                        },
+                        success: function (data) {
+                            var emailContent = second.find(".reopen-content-hidden");
+                            emailContent.html(data.template);
+                            flask_moment_render_all();
+                            tinyMCE.get("reopening-body").setContent(emailContent.html());
+                            editor.unblock();
+                            next2.prop('disabled', false);
+                        }
+                    });
+                    edit_body_header.html("Edit Email Body");
+                } else {
+                    $.ajax({
+                        url: "/response/letter",
+                        type: "POST",
+                        data: {
+                            request_id: "{{ request.id }}",
+                            type: "re-opening",
+                            date: date.val(),
+                            letter_template: letter_template.val(),
+                            reason: reason.val(),
+                            point_of_contact: point_of_contact.val(),
+                            tz_name: jstz.determine().name()
+                        },
+                        success: function (data) {
+                            var letterContent = second.find(".reopen-content-hidden");
+                            letterContent.html(data.template);
+                            flask_moment_render_all();
+                            tinyMCE.get("reopening-body").setContent(letterContent.html());
+                            editor.unblock();
+                            next2.prop('disabled', false);
+                        }
+                    });
+                    edit_body_header.html("Edit Letter Body");
+                }
+                first.hide();
+                second.show();
+                editor.block({
+                    message: '<div class=\"col-sm-12 loading-container\"><div class=\"loading-spinner\">' +
+                    '<span class=\"sr-only\">Loading content...</span></div></div>'
+                });
+                next2.prop('disabled', true);
+            }
+        });
+
+        next2.click(function () {
+            tinyMCE.triggerSave();
+
+            if (method.val() === 'emails') {
+                $.ajax({
+                    url: "/response/email",
+                    type: "POST",
+                    data: {
+                        request_id: "{{ request.id }}",
+                        type: "re-opening",
+                        email_content: second.find("#reopening-body").val()
+                    },
+                    success: function (data) {
+                        third.find(".summary").html(data.template);
+                        third.find("input[name='summary']").val(data.template);
+                        third.find("input[name='tz-name']").val(jstz.determine().name());
+                        third.find(".confirmation-header").text(data.header);
+                        third.find(".method").val(method.val());
+                        third.find("#header").html(data.header);
+                        confirmation.unblock();
+                        submit.prop('disabled', false);
+                    }
+                })
+            } else {
+                $.ajax({
+                    url: "/response/letter",
+                    type: "POST",
+                    data: {
+                        request_id: "{{ request.id }}",
+                        type: "re-opening",
+                        letter_content: second.find("#reopening-body").val()
+                    },
+                    success: function (data) {
+                        third.find(".summary").html(data.template);
+                        third.find("input[name='summary']").val(data.template);
+                        third.find("input[name='tz-name']").val(jstz.determine().name());
+                        third.find("input[name='letter-template-id']").val(letter_template.val());
+                        third.find(".confirmation-header").text(data.header);
+                        third.find(".method").val(method.val());
+                        third.find("#header").html(data.header);
+                        confirmation.unblock();
+                        submit.prop('disabled', false);
+                    }
+                });
+            }
+            second.hide();
+            third.show();
+            confirmation.block({
+                message: '<div class=\"col-sm-12 loading-container\"><div class=\"loading-spinner\">' +
+                '<span class=\"sr-only\">Loading content...</span></div></div>'
+            });
+            submit.prop('disabled', true);
+        });
+
+
+        prev2.click(function () {
+            second.hide();
+            first.show();
+        });
+
+
+        prev3.click(function () {
+            third.hide();
+            second.show();
+        });
+
+
+        form.submit(function () {
+            submit.attr("disabled", true);
+        });
+    })
+    ;
+</script>

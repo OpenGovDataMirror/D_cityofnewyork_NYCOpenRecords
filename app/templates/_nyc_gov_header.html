@@ -1,0 +1,40 @@
+<div class="nycidm-header" role="navigation" aria-label="Login">
+    <div class="upper-header-black">
+        <div class="container-nycidm">
+            {% if not current_user.is_anonymous %}
+                <span class="upper-header-right">
+                    <span class="upper-header-a">
+                        <!--
+                            See: base.js.html
+                            NYC.ID IDP logout url based on app environment (stg, prod, etc.)
+                        -->
+                        <a id="logout" href="{{ url_for('auth.logout') }}">Log Out</a>
+                    </span>
+                </span>
+                {% if current_user.has_nyc_id_profile %}
+                    <img class="vert-divide-right" alt="" src="{{ url_for('static', filename='img/upper-header-divider.gif') }}">
+                    <span class="upper-header-b">
+                        <!--
+                            See: base.js.html
+                            'href' value generated based on current page and app environment (stg, prod, etc.)
+                        -->
+                        <a id="profile-link" href="#">Profile</a>
+                    </span>
+                {% endif %}
+            {% else %}
+                <span class="upper-header-right">
+                    <span class="upper-header-a">
+                        <a href="{{ url_for('auth.login') }}">Log In</a>
+                    </span>
+                </span>
+            {% endif %}
+            <span class="upper-header-left">
+    		<a href="http://www1.nyc.gov/"><img class="small-nyc-logo" alt="NYC Logo" src="{{ url_for('static', filename='img/nyc_white@x2.png') }}"></a>
+    		<img class="vert-divide" alt="" src="{{ url_for('static', filename='img/upper-header-divider.gif') }}">
+                <span class="upper-header-black-title">
+                    OpenRecords
+                </span>
+            </span>
+        </div>
+    </div>
+</div>

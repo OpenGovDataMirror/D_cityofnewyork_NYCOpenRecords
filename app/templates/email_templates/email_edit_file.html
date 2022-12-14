@@ -1,0 +1,154 @@
+{% extends 'email_templates/email_response.html' %}
+{% block response_content %}
+    {% if not agency %}
+        {% if response_data.data_old['privacy'] != response_privacy.PRIVATE %}
+            <p>
+                <span class="mceNonEditable">
+                    A file in request <a href="{{ page }}">{{ request_id }}</a> has been edited.
+                </span>
+            </p>
+        {% else %}
+            <p>
+                <span class="mceNonEditable">
+                    A file in request <a href="{{ page }}">{{ request_id }}</a> is available for you to view.
+                </span>
+            </p>
+            <div class="file-links">
+            {% if response_data.response.request.requester.is_anonymous_requester %}
+                <p>
+                    <span class="mceNonEditable">
+                        Link to file: <a href="{{ response_data.file_link_for_user['requester'] }}">
+                        {% if response_data.data_new['name'] %}
+                            {{ response_data.data_new['name'] }}
+                        {% else %}
+                            {{ response_data.response.name }}
+                        {% endif %}
+                        </a>
+                    </span>
+                </p>
+            </div>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+    {% if response_data is not none %}
+        {% if agency or response_data.data_old['privacy'] != response_privacy.PRIVATE %}
+            {% if response_data.data_old['hash'] %}
+                {% if response_data.data_old['name'] %}
+                    <p>
+                        <span class="mceNonEditable">
+                            The <strong>file</strong>:
+                        </span>
+                    </p>
+                    <p style="padding-left: 30px;">
+                        <span class="mceNonEditable">
+                            {{ response_data.data_old['name'] }}
+                        </span>
+                    </p>
+                    <p><span class="mceNonEditable"> has been replaced with: </span></p>
+                    <p style="padding-left: 30px;">
+                        <span class="mceNonEditable">
+                            {{ response_data.data_new['name'] }}
+                        </span>
+                    </p>
+                {% else %}
+                    <p>
+                        <span class="mceNonEditable">
+                            The <strong>contents</strong> of {{ response_data.response.name }} have been changed.
+                        </span>
+                    </p>
+                {% endif %}
+            {% else %} <!-- If the file has only been renamed -->
+                {% if response_data.data_old['name'] %}
+                    <p>
+                        <span class="mceNonEditable">
+                            The file's <strong>name</strong> was changed from:
+                        </span>
+                    </p>
+                    <p style="padding-left: 30px;">
+                        <span class="mceNonEditable">
+                            {{ response_data.data_old['name'] }}
+                        </span>
+                    </p>
+                    <p><span class="mceNonEditable"> to: </span></p>
+                    <p style="padding-left: 30px;">
+                        <span class="mceNonEditable">
+                            {{ response_data.data_new['name'] }}
+                        </span>
+                    </p>
+                {% endif %}
+            {% endif %}
+
+            {% if response_data.data_old['title'] %}
+                <p>
+                    <span class="mceNonEditable">
+                        The <strong>title</strong> was changed from :
+                    </span>
+                </p>
+                <p style="padding-left: 30px;">
+                    <span class="mceNonEditable">
+                        {{ response_data.data_old['title'] }}
+                    </span>
+                </p>
+                <p><span class="mceNonEditable"> to: </span></p>
+                <p style="padding-left: 30px;">
+                    <span class="mceNonEditable">
+                        {{ response_data.data_new['title'] }}
+                    </span>
+                </p>
+            {% endif %}
+
+            {% if agency and response_data.data_old['privacy'] %}
+                <p>
+                    <span class="mceNonEditable">
+                        The <strong>privacy</strong> was changed from :
+                    </span>
+                </p>
+                <p style="padding-left: 30px;">
+                    <span class="mceNonEditable">
+                        {{ response_data.data_old['privacy'] | format_response_privacy }}
+                    </span>
+                </p>
+                <p><span class="mceNonEditable"> to: </span></p>
+                <p style="padding-left: 30px;">
+                    <span class="mceNonEditable">
+                    {{ response_data.data_new['privacy'] | format_response_privacy }}
+                    </span>
+                </p>
+            {% endif %}
+
+            <div class="file-links">
+            {% if not agency and response_data.response.request.requester.is_anonymous_requester %}
+                 <p>
+                    <span class="mceNonEditable">
+                         Link to file: <a href="{{ response_data.file_link_for_user['requester'] }}">
+                         {% if response_data.data_new['name'] %}
+                             {{ response_data.data_new['name'] }}
+                         {% else %}
+                             {{ response_data.response.name }}
+                         {% endif %}
+                        </a>
+                    </span>
+                 </p>
+            {% endif %}
+
+            {% if agency or not response_data.response.request.requester.is_anonymous_requester %}
+                <p>
+                    <span class="mceNonEditable">
+                        Link to file: <a href="{{ response_data.file_link_for_user['agency'] }}">
+                        {% if response_data.data_new['name'] %}
+                            {{ response_data.data_new['name'] }}
+                        {% else %}
+                            {{ response_data.response.name }}
+                        {% endif %}
+                        </a>
+                    </span>
+                </p>
+             {% endif %}
+            </div>
+        {% endif %}
+     {% endif %}
+    <p>
+        Please visit <a href='{{ page }}'>{{ page }}</a> to view additional information and take any necessary action.
+    </p>
+{% endblock %}

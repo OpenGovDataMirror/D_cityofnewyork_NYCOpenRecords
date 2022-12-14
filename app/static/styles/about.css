@@ -1,0 +1,13 @@
+.row-centered {
+    text-align: center;
+    font-size: 15px;
+}
+
+#nyc-seal {
+    float: left;
+    padding-right: 3em;
+}
+
+.about-heading {
+    font-size: 18px;
+}
